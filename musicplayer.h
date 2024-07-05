@@ -40,6 +40,8 @@ private slots:
 
     void on_voice_clicked();
 
+    // void on_timeslider_sliderMoved(int position);
+
 private:
     Ui::musicplayer *ui;
     QList<QUrl> playList;

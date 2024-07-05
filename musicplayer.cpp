@@ -17,19 +17,24 @@ musicplayer::musicplayer(QWidget *parent) :
     output=new QAudioOutput(this);
     player=new QMediaPlayer(this);
     player->setAudioOutput(output);
-    connect(player,&QMediaPlayer::durationChanged,this,[=](qint64 duration){
+    connect(player,&QMediaPlayer::durationChanged,this,[=](qint64 duration){//音乐总时长
         ui->time2->setText(QString("%1:%2")
         .arg(duration/1000/60,2,10,QChar('0'))
         .arg(duration/1000%60,2,10,QChar('0')));
         ui->timeslider->setRange(0,duration);
     });
-    connect(player,&QMediaPlayer::positionChanged,this,[=](qint64 position){
+    connect(player,&QMediaPlayer::positionChanged,this,[=](qint64 position){//当前播放时刻
+        if(ui->timeslider->isSliderDown())//如果手动调整进度条，则不处理（解决拖动进度条时播放时刻是当前播放进度的bug)
+        return;
         ui->time1->setText(QString("%1:%2")
         .arg(position/1000/60,2,10,QChar('0'))
         .arg(position/1000%60,2,10,QChar('0')));
-        if(ui->timeslider->isSliderDown())
-            return;//如果手动调整进度条，则不处理
         ui->timeslider->setSliderPosition(position);
+    });
+    connect(ui->timeslider, &QSlider::valueChanged, this, [=](qint64 position) { // 播放时刻随进度条值改变
+        ui->time1->setText(QString("%1:%2")
+        .arg(position / 1000 / 60, 2, 10, QChar('0'))
+        .arg(position / 1000 % 60, 2, 10, QChar('0')));
     });
     // connect(ui->volumeslider,&QSlider::sliderMoved,output,&QAudioOutput::setVolume);
     // connect(output,&QAudioOutput::setVolume,ui->volumeslider,&QSlider::setSliderPosition);
@@ -139,10 +144,13 @@ void musicplayer::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 
 
 
-void musicplayer::on_timeslider_sliderReleased()
+void musicplayer::on_timeslider_sliderReleased()//进度条更改音乐播放进度
 {
     int position = ui->timeslider->value();
     player->setPosition(position);
+    ui->time1->setText(QString("%1:%2")
+     .arg(position / 1000 / 60, 2, 10, QChar('0'))
+     .arg(position / 1000 % 60, 2, 10, QChar('0')));
 }
 
 
@@ -171,4 +179,12 @@ void musicplayer::on_voice_clicked()
     //按下声音键切换静音状态和音量状态
     output->setMuted(!output->isMuted());
 }
+
+
+// void musicplayer::on_timeslider_sliderMoved(int position)
+// {
+//     ui->time1->setText(QString("%1:%2")
+//     .arg(position / 1000 / 60, 2, 10, QChar('0'))
+//     .arg(position / 1000 % 60, 2, 10, QChar('0')));
+// }
 
