@@ -125,6 +125,7 @@ release/qrc_QTMusicPlayer.cpp: QTMusicPlayer.qrc \
 		QTMusicPlayer/geciyidianji.png \
 		QTMusicPlayer/pifu.png \
 		QTMusicPlayer/gengduo.png \
+		QTMusicPlayer/logo.jpg \
 		QTMusicPlayer/bk1.jpg \
 		QTMusicPlayer/bofangliebiao.png \
 		QTMusicPlayer/shunxubofang.png \
@@ -132,6 +133,7 @@ release/qrc_QTMusicPlayer.cpp: QTMusicPlayer.qrc \
 		QTMusicPlayer/hengxian.png \
 		QTMusicPlayer/guanbi.png \
 		QTMusicPlayer/bk6.jpg \
+		QTMusicPlayer/wallpaper.png \
 		QTMusicPlayer/bk7.jpg \
 		QTMusicPlayer/bk8.jpg \
 		QTMusicPlayer/bk10.jpg \
@@ -146,6 +148,7 @@ release/qrc_QTMusicPlayer.cpp: QTMusicPlayer.qrc \
 		QTMusicPlayer/bk11.jpg \
 		QTMusicPlayer/jingyin.png \
 		QTMusicPlayer/bk5.jpg \
+		QTMusicPlayer/Music.svg \
 		QTMusicPlayer/xiazai.png
 	E:\Qt\6.7.2\mingw_64\bin\rcc.exe -name QTMusicPlayer --no-zstd QTMusicPlayer.qrc -o release\qrc_QTMusicPlayer.cpp
 
@@ -839,20 +842,28 @@ release/musicplayer.o: musicplayer.cpp musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtGui/QIcon \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
-		../../Qt/6.7.2/mingw_64/include/QtWidgets/QHBoxLayout \
-		../../Qt/6.7.2/mingw_64/include/QtWidgets/qboxlayout.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QGridLayout \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qgridlayout.h \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qlayout.h \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qlayoutitem.h \
-		../../Qt/6.7.2/mingw_64/include/QtWidgets/qgridlayout.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qboxlayout.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QHBoxLayout \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QLabel \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qlabel.h \
 		../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
 		../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QLineEdit \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qlineedit.h \
+		../../Qt/6.7.2/mingw_64/include/QtGui/qtextcursor.h \
+		../../Qt/6.7.2/mingw_64/include/QtGui/qtextformat.h \
+		../../Qt/6.7.2/mingw_64/include/QtGui/qpen.h \
+		../../Qt/6.7.2/mingw_64/include/QtGui/qtextoption.h \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qpushbutton.h \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QSlider \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QSpacerItem \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QVBoxLayout \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QFileDialog \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qfiledialog.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qdir.h \
@@ -867,9 +878,12 @@ release/musicplayer.o: musicplayer.cpp musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/QDir \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QMediaPlayer \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QAudioOutput \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QListWidgetItem \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QMessageBox \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qmessagebox.h \
-		../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+		../../Qt/6.7.2/mingw_64/include/QtGui/QBrush \
+		../../Qt/6.7.2/mingw_64/include/QtGui/QColor
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\musicplayer.o musicplayer.cpp
 
 release/qrc_QTMusicPlayer.o: release/qrc_QTMusicPlayer.cpp 

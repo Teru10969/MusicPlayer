@@ -33,6 +33,8 @@ public:
     QVBoxLayout *verticalLayout_2;
     QWidget *widget_2;
     QHBoxLayout *horizontalLayout_4;
+    QWidget *widget_9;
+    QLabel *label;
     QSpacerItem *horizontalSpacer_2;
     QWidget *widget_4;
     QHBoxLayout *horizontalLayout_5;
@@ -75,14 +77,18 @@ public:
     {
         if (musicplayer->objectName().isEmpty())
             musicplayer->setObjectName("musicplayer");
-        musicplayer->resize(640, 480);
+        musicplayer->resize(960, 540);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(musicplayer->sizePolicy().hasHeightForWidth());
         musicplayer->setSizePolicy(sizePolicy);
-        musicplayer->setMinimumSize(QSize(640, 480));
-        musicplayer->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+        musicplayer->setMinimumSize(QSize(960, 540));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/QTMusicPlayer/logo.jpg"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        musicplayer->setWindowIcon(icon);
+        musicplayer->setStyleSheet(QString::fromUtf8("#widget_3{border-image: url(:/QTMusicPlayer/wallpaper.png);}\n"
+"QPushButton {\n"
 "    border: none;\n"
 "    border-radius:10px\n"
 "}\n"
@@ -111,13 +117,13 @@ public:
         gridLayout->setSpacing(0);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName("gridLayout");
-        gridLayout->setContentsMargins(0, 0, 0, 0);
+        gridLayout->setContentsMargins(0, 0, 1, 0);
         widget_3 = new QWidget(musicplayer);
         widget_3->setObjectName("widget_3");
         sizePolicy.setHeightForWidth(widget_3->sizePolicy().hasHeightForWidth());
         widget_3->setSizePolicy(sizePolicy);
         widget_3->setLayoutDirection(Qt::LeftToRight);
-        widget_3->setAutoFillBackground(true);
+        widget_3->setAutoFillBackground(false);
         verticalLayout_2 = new QVBoxLayout(widget_3);
         verticalLayout_2->setSpacing(0);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -132,19 +138,36 @@ public:
         widget_2->setSizePolicy(sizePolicy1);
         widget_2->setLayoutDirection(Qt::LeftToRight);
         horizontalLayout_4 = new QHBoxLayout(widget_2);
-        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setSpacing(0);
         horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_4->setObjectName("horizontalLayout_4");
-        horizontalLayout_4->setContentsMargins(0, 3, 0, 6);
+        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
+        widget_9 = new QWidget(widget_2);
+        widget_9->setObjectName("widget_9");
+        widget_9->setEnabled(true);
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(widget_9->sizePolicy().hasHeightForWidth());
+        widget_9->setSizePolicy(sizePolicy2);
+        widget_9->setMinimumSize(QSize(40, 40));
+        widget_9->setMaximumSize(QSize(900, 900));
+        widget_9->setStyleSheet(QString::fromUtf8("image: url(:/QTMusicPlayer/Music.svg);"));
+
+        horizontalLayout_4->addWidget(widget_9);
+
+        label = new QLabel(widget_2);
+        label->setObjectName("label");
+        label->setTextFormat(Qt::PlainText);
+
+        horizontalLayout_4->addWidget(label);
+
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Minimum);
 
         horizontalLayout_4->addItem(horizontalSpacer_2);
 
         widget_4 = new QWidget(widget_2);
         widget_4->setObjectName("widget_4");
-        QSizePolicy sizePolicy2(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Preferred);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(widget_4->sizePolicy().hasHeightForWidth());
         widget_4->setSizePolicy(sizePolicy2);
         widget_4->setMinimumSize(QSize(500, 0));
@@ -153,35 +176,38 @@ public:
         horizontalLayout_5->setSpacing(0);
         horizontalLayout_5->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_5->setObjectName("horizontalLayout_5");
-        horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_5->setContentsMargins(0, 0, 0, 6);
         widget_7 = new QWidget(widget_4);
         widget_7->setObjectName("widget_7");
         sizePolicy2.setHeightForWidth(widget_7->sizePolicy().hasHeightForWidth());
         widget_7->setSizePolicy(sizePolicy2);
-        widget_7->setMinimumSize(QSize(0, 32));
+        widget_7->setMinimumSize(QSize(0, 40));
         search = new QPushButton(widget_7);
         search->setObjectName("search");
-        search->setGeometry(QRect(380, 0, 32, 32));
+        search->setGeometry(QRect(400, 2, 32, 32));
         sizePolicy.setHeightForWidth(search->sizePolicy().hasHeightForWidth());
         search->setSizePolicy(sizePolicy);
         search->setMinimumSize(QSize(32, 32));
         search->setMaximumSize(QSize(32, 32));
-        QIcon icon;
-        icon.addFile(QString::fromUtf8(":/QTMusicPlayer/chazhao.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        search->setIcon(icon);
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/QTMusicPlayer/chazhao.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        search->setIcon(icon1);
+        search->setAutoDefault(false);
         searchline = new QLineEdit(widget_7);
         searchline->setObjectName("searchline");
-        searchline->setGeometry(QRect(70, 0, 341, 32));
+        searchline->setGeometry(QRect(90, 2, 341, 32));
         sizePolicy.setHeightForWidth(searchline->sizePolicy().hasHeightForWidth());
         searchline->setSizePolicy(sizePolicy);
         searchline->setMinimumSize(QSize(0, 32));
+        searchline->setMaximumSize(QSize(16777215, 32));
+        searchline->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
         searchline->raise();
         search->raise();
 
         horizontalLayout_5->addWidget(widget_7);
 
 
-        horizontalLayout_4->addWidget(widget_4, 0, Qt::AlignHCenter);
+        horizontalLayout_4->addWidget(widget_4);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Minimum);
 
@@ -190,13 +216,15 @@ public:
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName("horizontalLayout");
+        horizontalLayout->setContentsMargins(-1, -1, -1, 10);
         pushButton = new QPushButton(widget_2);
         pushButton->setObjectName("pushButton");
         pushButton->setMinimumSize(QSize(32, 32));
         pushButton->setMaximumSize(QSize(32, 32));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/QTMusicPlayer/zuixiaohua.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        pushButton->setIcon(icon1);
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/QTMusicPlayer/zuixiaohua.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        pushButton->setIcon(icon2);
+        pushButton->setIconSize(QSize(23, 23));
 
         horizontalLayout->addWidget(pushButton);
 
@@ -208,18 +236,19 @@ public:
 "	\n"
 "	background-color: rgb(255, 0, 0);\n"
 "}"));
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/QTMusicPlayer/guanbi.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        close->setIcon(icon2);
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/QTMusicPlayer/guanbi.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        close->setIcon(icon3);
+        close->setIconSize(QSize(23, 23));
 
         horizontalLayout->addWidget(close);
 
 
         horizontalLayout_4->addLayout(horizontalLayout);
 
-        horizontalLayout_4->setStretch(0, 1);
-        horizontalLayout_4->setStretch(1, 2);
         horizontalLayout_4->setStretch(2, 1);
+        horizontalLayout_4->setStretch(3, 2);
+        horizontalLayout_4->setStretch(4, 1);
 
         verticalLayout_2->addWidget(widget_2);
 
@@ -234,17 +263,19 @@ public:
         horizontalLayout_6->setSpacing(6);
         horizontalLayout_6->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_6->setObjectName("horizontalLayout_6");
+        horizontalLayout_6->setContentsMargins(0, 0, 0, 0);
         listWidget_2 = new QListWidget(widget_8);
         new QListWidgetItem(listWidget_2);
-        new QListWidgetItem(listWidget_2);
+        QBrush brush(QColor(0, 0, 0, 255));
+        brush.setStyle(Qt::NoBrush);
+        QListWidgetItem *__qlistwidgetitem = new QListWidgetItem(listWidget_2);
+        __qlistwidgetitem->setBackground(brush);
         new QListWidgetItem(listWidget_2);
         listWidget_2->setObjectName("listWidget_2");
-        listWidget_2->setStyleSheet(QString::fromUtf8("QListWidget#listT1\n"
+        listWidget_2->setStyleSheet(QString::fromUtf8("QListWidget\n"
 "{\n"
-"	padding-top:13px;\n"
 "	border:0px;\n"
 "	color:rgb(55,55,55);\n"
-"	background-color: rgb(43, 43, 43);\n"
 "	padding-left:15px;	\n"
 "}\n"
 " \n"
@@ -263,9 +294,9 @@ public:
 " \n"
 "}\n"
 " \n"
-"QListWidget::Item:hover#listT1\n"
+"QListWidget::Item:hover\n"
 "{\n"
-"	background:rgb(66,66,66);	\n"
+"	background-color: rgb(232, 232, 232);\n"
 "}\n"
 "/*\351\200\211\344\270\255*/\n"
 "QListWidget::Item:selected\n"
@@ -275,17 +306,52 @@ public:
 "	border:0px;\n"
 "	background:rgb(221,221,221);	\n"
 "}\n"
+"\n"
 ""));
 
         horizontalLayout_6->addWidget(listWidget_2);
 
         listWidget = new QListWidget(widget_8);
         listWidget->setObjectName("listWidget");
+        listWidget->setStyleSheet(QString::fromUtf8("QListWidget\n"
+"{\n"
+"	border:0px;\n"
+"	\n"
+"}\n"
+" \n"
+"/*\345\216\273\351\231\244\347\204\246\347\202\271\350\231\232\347\272\277*/\n"
+"*\n"
+"{\n"
+"	outline:0px;\n"
+"}\n"
+" \n"
+"QListWidget::Item\n"
+"{\n"
+"	height:50;\n"
+"    border:0px solid rgb(255,255,255);	\n"
+"	padding-top:1px;\n"
+"}\n"
+" \n"
+"QListWidget::Item:hover\n"
+"{\n"
+"	background-color: rgb(232, 232, 232);\n"
+"}\n"
+"\n"
+"/*\351\200\211\344\270\255*/\n"
+"QListWidget::Item:selected\n"
+"{\n"
+"	font: 75 16pt \"\351\230\277\351\207\214\345\246\210\345\246\210\346\225\260\351\273\221\344\275\223\";\n"
+"	color:rgb(55,55,55);\n"
+"	border:0px;\n"
+"	background:rgb(221,221,221);	\n"
+"}\n"
+""));
+        listWidget->setSelectionRectVisible(false);
 
         horizontalLayout_6->addWidget(listWidget);
 
         horizontalLayout_6->setStretch(0, 1);
-        horizontalLayout_6->setStretch(1, 5);
+        horizontalLayout_6->setStretch(1, 4);
 
         verticalLayout_2->addWidget(widget_8);
 
@@ -310,7 +376,7 @@ public:
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName("horizontalLayout_2");
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+        horizontalSpacer_8 = new QSpacerItem(340, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_8);
 
@@ -323,14 +389,14 @@ public:
         load->setSizePolicy(sizePolicy4);
         load->setMinimumSize(QSize(32, 32));
         load->setMaximumSize(QSize(32, 32));
-        QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/QTMusicPlayer/wenjianjia.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        load->setIcon(icon3);
+        QIcon icon4;
+        icon4.addFile(QString::fromUtf8(":/QTMusicPlayer/wenjianjia.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        load->setIcon(icon4);
         load->setIconSize(QSize(32, 32));
 
         horizontalLayout_2->addWidget(load);
 
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_3);
 
@@ -340,9 +406,9 @@ public:
         previous->setSizePolicy(sizePolicy4);
         previous->setMinimumSize(QSize(32, 32));
         previous->setMaximumSize(QSize(32, 32));
-        QIcon icon4;
-        icon4.addFile(QString::fromUtf8(":/QTMusicPlayer/shangyishou.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        previous->setIcon(icon4);
+        QIcon icon5;
+        icon5.addFile(QString::fromUtf8(":/QTMusicPlayer/shangyishou.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        previous->setIcon(icon5);
         previous->setIconSize(QSize(26, 26));
 
         horizontalLayout_2->addWidget(previous, 0, Qt::AlignHCenter);
@@ -353,10 +419,10 @@ public:
         play->setSizePolicy(sizePolicy4);
         play->setMinimumSize(QSize(32, 32));
         play->setMaximumSize(QSize(32, 32));
-        QIcon icon5;
-        icon5.addFile(QString::fromUtf8(":/QTMusicPlayer/bofang.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        icon5.addFile(QString::fromUtf8(":/QTMusicPlayer/zanting.png"), QSize(), QIcon::Mode::Normal, QIcon::State::On);
-        play->setIcon(icon5);
+        QIcon icon6;
+        icon6.addFile(QString::fromUtf8(":/QTMusicPlayer/bofang.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon6.addFile(QString::fromUtf8(":/QTMusicPlayer/zanting.png"), QSize(), QIcon::Mode::Normal, QIcon::State::On);
+        play->setIcon(icon6);
         play->setIconSize(QSize(40, 40));
         play->setCheckable(true);
 
@@ -368,9 +434,9 @@ public:
         next->setSizePolicy(sizePolicy4);
         next->setMinimumSize(QSize(32, 32));
         next->setMaximumSize(QSize(32, 32));
-        QIcon icon6;
-        icon6.addFile(QString::fromUtf8(":/QTMusicPlayer/xiayishou.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        next->setIcon(icon6);
+        QIcon icon7;
+        icon7.addFile(QString::fromUtf8(":/QTMusicPlayer/xiayishou.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        next->setIcon(icon7);
         next->setIconSize(QSize(26, 26));
 
         horizontalLayout_2->addWidget(next, 0, Qt::AlignHCenter);
@@ -385,10 +451,10 @@ public:
         voice->setSizePolicy(sizePolicy4);
         voice->setMinimumSize(QSize(32, 32));
         voice->setMaximumSize(QSize(32, 32));
-        QIcon icon7;
-        icon7.addFile(QString::fromUtf8(":/QTMusicPlayer/yinliang.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        icon7.addFile(QString::fromUtf8(":/QTMusicPlayer/jingyin.png"), QSize(), QIcon::Mode::Normal, QIcon::State::On);
-        voice->setIcon(icon7);
+        QIcon icon8;
+        icon8.addFile(QString::fromUtf8(":/QTMusicPlayer/yinliang.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon8.addFile(QString::fromUtf8(":/QTMusicPlayer/jingyin.png"), QSize(), QIcon::Mode::Normal, QIcon::State::On);
+        voice->setIcon(icon8);
         voice->setIconSize(QSize(32, 32));
         voice->setCheckable(true);
 
@@ -419,14 +485,14 @@ public:
         download->setSizePolicy(sizePolicy4);
         download->setMinimumSize(QSize(32, 32));
         download->setMaximumSize(QSize(32, 32));
-        QIcon icon8;
-        icon8.addFile(QString::fromUtf8(":/QTMusicPlayer/xiazai.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        download->setIcon(icon8);
+        QIcon icon9;
+        icon9.addFile(QString::fromUtf8(":/QTMusicPlayer/xiazai.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        download->setIcon(icon9);
         download->setIconSize(QSize(40, 40));
 
         horizontalLayout_2->addWidget(download);
 
-        horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+        horizontalSpacer_9 = new QSpacerItem(200, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_9);
 
@@ -494,6 +560,7 @@ public:
     void retranslateUi(QWidget *musicplayer)
     {
         musicplayer->setWindowTitle(QCoreApplication::translate("musicplayer", "musicplayer", nullptr));
+        label->setText(QCoreApplication::translate("musicplayer", "TeruMusicPlayer", nullptr));
         search->setText(QString());
         pushButton->setText(QString());
         close->setText(QString());

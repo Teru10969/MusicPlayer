@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>960</width>
+    <height>540</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,15 +18,20 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>640</width>
-    <height>480</height>
+    <width>960</width>
+    <height>540</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>musicplayer</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="QTMusicPlayer.qrc">
+    <normaloff>:/QTMusicPlayer/logo.jpg</normaloff>:/QTMusicPlayer/logo.jpg</iconset>
+  </property>
   <property name="styleSheet">
-   <string notr="true">QPushButton {
+   <string notr="true">#widget_3{border-image: url(:/QTMusicPlayer/wallpaper.png);}
+QPushButton {
     border: none;
     border-radius:10px
 }
@@ -60,7 +65,7 @@ QSlider::groove:Horizontal#horizontalSlider_music
     <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>1</number>
    </property>
    <property name="bottomMargin">
     <number>0</number>
@@ -80,7 +85,7 @@ QSlider::groove:Horizontal#horizontalSlider_music
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="autoFillBackground">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
@@ -109,22 +114,60 @@ QSlider::groove:Horizontal#horizontalSlider_music
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,2,1,0">
+        <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,0,1,2,1,0">
          <property name="spacing">
-          <number>6</number>
+          <number>0</number>
          </property>
          <property name="leftMargin">
           <number>0</number>
          </property>
          <property name="topMargin">
-          <number>3</number>
+          <number>0</number>
          </property>
          <property name="rightMargin">
           <number>0</number>
          </property>
          <property name="bottomMargin">
-          <number>6</number>
+          <number>0</number>
          </property>
+         <item>
+          <widget class="QWidget" name="widget_9" native="true">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>900</width>
+             <height>900</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">image: url(:/QTMusicPlayer/Music.svg);</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>TeruMusicPlayer</string>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::PlainText</enum>
+           </property>
+          </widget>
+         </item>
          <item>
           <spacer name="horizontalSpacer_2">
            <property name="orientation">
@@ -141,7 +184,7 @@ QSlider::groove:Horizontal#horizontalSlider_music
            </property>
           </spacer>
          </item>
-         <item alignment="Qt::AlignHCenter">
+         <item>
           <widget class="QWidget" name="widget_4" native="true">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -172,7 +215,7 @@ QSlider::groove:Horizontal#horizontalSlider_music
              <number>0</number>
             </property>
             <property name="bottomMargin">
-             <number>0</number>
+             <number>6</number>
             </property>
             <item>
              <widget class="QWidget" name="widget_7" native="true">
@@ -185,14 +228,14 @@ QSlider::groove:Horizontal#horizontalSlider_music
               <property name="minimumSize">
                <size>
                 <width>0</width>
-                <height>32</height>
+                <height>40</height>
                </size>
               </property>
               <widget class="QPushButton" name="search">
                <property name="geometry">
                 <rect>
-                 <x>380</x>
-                 <y>0</y>
+                 <x>400</x>
+                 <y>2</y>
                  <width>32</width>
                  <height>32</height>
                 </rect>
@@ -222,12 +265,15 @@ QSlider::groove:Horizontal#horizontalSlider_music
                 <iconset resource="QTMusicPlayer.qrc">
                  <normaloff>:/QTMusicPlayer/chazhao.png</normaloff>:/QTMusicPlayer/chazhao.png</iconset>
                </property>
+               <property name="autoDefault">
+                <bool>false</bool>
+               </property>
               </widget>
               <widget class="QLineEdit" name="searchline">
                <property name="geometry">
                 <rect>
-                 <x>70</x>
-                 <y>0</y>
+                 <x>90</x>
+                 <y>2</y>
                  <width>341</width>
                  <height>32</height>
                 </rect>
@@ -243,6 +289,15 @@ QSlider::groove:Horizontal#horizontalSlider_music
                  <width>0</width>
                  <height>32</height>
                 </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>32</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                </property>
               </widget>
               <zorder>searchline</zorder>
@@ -270,6 +325,9 @@ QSlider::groove:Horizontal#horizontalSlider_music
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout">
+           <property name="bottomMargin">
+            <number>10</number>
+           </property>
            <item>
             <widget class="QPushButton" name="pushButton">
              <property name="minimumSize">
@@ -290,6 +348,12 @@ QSlider::groove:Horizontal#horizontalSlider_music
              <property name="icon">
               <iconset resource="QTMusicPlayer.qrc">
                <normaloff>:/QTMusicPlayer/zuixiaohua.png</normaloff>:/QTMusicPlayer/zuixiaohua.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>23</width>
+               <height>23</height>
+              </size>
              </property>
             </widget>
            </item>
@@ -320,6 +384,12 @@ QSlider::groove:Horizontal#horizontalSlider_music
               <iconset resource="QTMusicPlayer.qrc">
                <normaloff>:/QTMusicPlayer/guanbi.png</normaloff>:/QTMusicPlayer/guanbi.png</iconset>
              </property>
+             <property name="iconSize">
+              <size>
+               <width>23</width>
+               <height>23</height>
+              </size>
+             </property>
             </widget>
            </item>
           </layout>
@@ -335,16 +405,29 @@ QSlider::groove:Horizontal#horizontalSlider_music
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,5">
+        <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,4">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QListWidget" name="listWidget_2">
            <property name="styleSheet">
-            <string notr="true">QListWidget#listT1
+            <string notr="true">QListWidget
 {
-	padding-top:13px;
 	border:0px;
 	color:rgb(55,55,55);
-	background-color: rgb(43, 43, 43);
 	padding-left:15px;	
 }
  
@@ -363,9 +446,9 @@ QListWidget::Item
  
 }
  
-QListWidget::Item:hover#listT1
+QListWidget::Item:hover
 {
-	background:rgb(66,66,66);	
+	background-color: rgb(232, 232, 232);
 }
 /*选中*/
 QListWidget::Item:selected
@@ -375,6 +458,7 @@ QListWidget::Item:selected
 	border:0px;
 	background:rgb(221,221,221);	
 }
+
 </string>
            </property>
            <item>
@@ -386,6 +470,15 @@ QListWidget::Item:selected
             <property name="text">
              <string>网络音乐</string>
             </property>
+            <property name="background">
+             <brush brushstyle="NoBrush">
+              <color alpha="255">
+               <red>0</red>
+               <green>0</green>
+               <blue>0</blue>
+              </color>
+             </brush>
+            </property>
            </item>
            <item>
             <property name="text">
@@ -395,7 +488,46 @@ QListWidget::Item:selected
           </widget>
          </item>
          <item>
-          <widget class="QListWidget" name="listWidget"/>
+          <widget class="QListWidget" name="listWidget">
+           <property name="styleSheet">
+            <string notr="true">QListWidget
+{
+	border:0px;
+	
+}
+ 
+/*去除焦点虚线*/
+*
+{
+	outline:0px;
+}
+ 
+QListWidget::Item
+{
+	height:50;
+    border:0px solid rgb(255,255,255);	
+	padding-top:1px;
+}
+ 
+QListWidget::Item:hover
+{
+	background-color: rgb(232, 232, 232);
+}
+
+/*选中*/
+QListWidget::Item:selected
+{
+	font: 75 16pt &quot;阿里妈妈数黑体&quot;;
+	color:rgb(55,55,55);
+	border:0px;
+	background:rgb(221,221,221);	
+}
+</string>
+           </property>
+           <property name="selectionRectVisible">
+            <bool>false</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -476,7 +608,7 @@ QListWidget::Item:selected
               </property>
               <property name="sizeHint" stdset="0">
                <size>
-                <width>40</width>
+                <width>340</width>
                 <height>20</height>
                </size>
               </property>
@@ -523,7 +655,7 @@ QListWidget::Item:selected
                <enum>Qt::Horizontal</enum>
               </property>
               <property name="sizeType">
-               <enum>QSizePolicy::Expanding</enum>
+               <enum>QSizePolicy::Fixed</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -789,7 +921,7 @@ QListWidget::Item:selected
               </property>
               <property name="sizeHint" stdset="0">
                <size>
-                <width>40</width>
+                <width>200</width>
                 <height>20</height>
                </size>
               </property>
@@ -826,6 +958,9 @@ QListWidget::Item:selected
              <spacer name="horizontalSpacer_6">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Expanding</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -908,6 +1043,9 @@ QListWidget::Item:selected
              <spacer name="horizontalSpacer_7">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Expanding</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>

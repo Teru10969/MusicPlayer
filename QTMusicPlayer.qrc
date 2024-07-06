@@ -43,5 +43,8 @@
         <file>QTMusicPlayer/zuidahua.png</file>
         <file>QTMusicPlayer/zuixiaohua.png</file>
         <file>QTMusicPlayer/hua.png</file>
+        <file>QTMusicPlayer/wallpaper.png</file>
+        <file>QTMusicPlayer/logo.jpg</file>
+        <file>QTMusicPlayer/Music.svg</file>
     </qresource>
 </RCC>

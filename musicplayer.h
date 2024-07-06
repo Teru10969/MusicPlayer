@@ -17,6 +17,7 @@ class musicplayer : public QWidget
 public:
     explicit musicplayer(QWidget *parent = 0);
     ~musicplayer();
+    void updateCurrentPlayingItem();
 
 private slots:
 
@@ -41,6 +42,8 @@ private slots:
     void on_voice_clicked();
 
     // void on_timeslider_sliderMoved(int position);
+
+    void on_listWidget_itemClicked(QListWidgetItem *item);
 
 private:
     Ui::musicplayer *ui;
