@@ -12,7 +12,7 @@ musicplayer::musicplayer(QWidget *parent) :
     ui(new Ui::musicplayer)
 {
     ui->setupUi(this);
-    setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
+    // setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
 
     output=new QAudioOutput(this);
     player=new QMediaPlayer(this);

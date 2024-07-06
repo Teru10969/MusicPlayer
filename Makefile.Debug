@@ -866,7 +866,10 @@ debug/musicplayer.o: musicplayer.cpp musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/QDebug \
 		../../Qt/6.7.2/mingw_64/include/QtCore/QDir \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QMediaPlayer \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QAudioOutput
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QAudioOutput \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QMessageBox \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qmessagebox.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\musicplayer.o musicplayer.cpp
 
 debug/qrc_QTMusicPlayer.o: debug/qrc_QTMusicPlayer.cpp 

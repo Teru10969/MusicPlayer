@@ -866,7 +866,10 @@ release/musicplayer.o: musicplayer.cpp musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/QDebug \
 		../../Qt/6.7.2/mingw_64/include/QtCore/QDir \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QMediaPlayer \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QAudioOutput
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QAudioOutput \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QMessageBox \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qmessagebox.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\musicplayer.o musicplayer.cpp
 
 release/qrc_QTMusicPlayer.o: release/qrc_QTMusicPlayer.cpp 
