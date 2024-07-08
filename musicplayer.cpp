@@ -33,7 +33,7 @@ musicplayer::musicplayer(QWidget *parent) :
     ui(new Ui::musicplayer)
 {
     ui->setupUi(this);
-    // setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
+    setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
     output=new QAudioOutput(this);
     player=new QMediaPlayer(this);
     player->setAudioOutput(output);
@@ -143,6 +143,7 @@ void musicplayer::on_load_clicked()//导入本地音乐文件
     }
 
     player->setSource(playList[index]);
+    ui->option->setCurrentRow(0);
     // ui->LocalMusiclist->setCurrentRow(0);
 }
 

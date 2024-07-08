@@ -26,11 +26,12 @@
    <string>musicplayer</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="QTMusicPlayer.qrc">
+   <iconset>
     <normaloff>:/QTMusicPlayer/logo.jpg</normaloff>:/QTMusicPlayer/logo.jpg</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">#widget_3{border-image: url(:/QTMusicPlayer/wallpaper.png);}
+   <string notr="true">#widget_3{border-image: url(:/res/wallpaper1.png);}
+
 QPushButton {
     border: none;
     border-radius:10px
@@ -68,7 +69,7 @@ QSlider::groove:Horizontal#horizontalSlider_music
     <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
     <number>0</number>
@@ -104,12 +105,18 @@ QSlider::groove:Horizontal#horizontalSlider_music
        <number>0</number>
       </property>
       <item>
-       <widget class="QWidget" name="widget_2" native="true">
+       <widget class="QWidget" name="head" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>60</height>
+         </size>
         </property>
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
@@ -143,8 +150,8 @@ QSlider::groove:Horizontal#horizontalSlider_music
            </property>
            <property name="minimumSize">
             <size>
-             <width>40</width>
-             <height>40</height>
+             <width>60</width>
+             <height>60</height>
             </size>
            </property>
            <property name="maximumSize">
@@ -154,14 +161,18 @@ QSlider::groove:Horizontal#horizontalSlider_music
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">image: url(:/QTMusicPlayer/Music.svg);</string>
+            <string notr="true">image: url(:/res/One Last Kiss.jpg);</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="label">
+           <property name="styleSheet">
+            <string notr="true">font: 20pt &quot;Mistral&quot;;
+font-color:rgb(85, 85, 127);</string>
+           </property>
            <property name="text">
-            <string>TeruMusicPlayer</string>
+            <string> TeruMusicPlayer</string>
            </property>
            <property name="textFormat">
             <enum>Qt::PlainText</enum>
@@ -234,10 +245,10 @@ QSlider::groove:Horizontal#horizontalSlider_music
               <widget class="QPushButton" name="search">
                <property name="geometry">
                 <rect>
-                 <x>400</x>
-                 <y>2</y>
-                 <width>32</width>
-                 <height>32</height>
+                 <x>390</x>
+                 <y>10</y>
+                 <width>40</width>
+                 <height>40</height>
                 </rect>
                </property>
                <property name="sizePolicy">
@@ -248,22 +259,22 @@ QSlider::groove:Horizontal#horizontalSlider_music
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>32</width>
-                 <height>32</height>
+                 <width>40</width>
+                 <height>40</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>32</width>
-                 <height>32</height>
+                 <width>40</width>
+                 <height>40</height>
                 </size>
                </property>
                <property name="text">
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="QTMusicPlayer.qrc">
-                 <normaloff>:/QTMusicPlayer/chazhao.png</normaloff>:/QTMusicPlayer/chazhao.png</iconset>
+                <iconset resource="res.qrc">
+                 <normaloff>:/res/chazhao.png</normaloff>:/res/chazhao.png</iconset>
                </property>
                <property name="autoDefault">
                 <bool>false</bool>
@@ -272,10 +283,10 @@ QSlider::groove:Horizontal#horizontalSlider_music
               <widget class="QLineEdit" name="searchline">
                <property name="geometry">
                 <rect>
-                 <x>90</x>
-                 <y>2</y>
-                 <width>341</width>
-                 <height>32</height>
+                 <x>30</x>
+                 <y>10</y>
+                 <width>400</width>
+                 <height>40</height>
                 </rect>
                </property>
                <property name="sizePolicy">
@@ -287,13 +298,13 @@ QSlider::groove:Horizontal#horizontalSlider_music
                <property name="minimumSize">
                 <size>
                  <width>0</width>
-                 <height>32</height>
+                 <height>40</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
-                 <height>32</height>
+                 <height>40</height>
                 </size>
                </property>
                <property name="alignment">
@@ -325,6 +336,9 @@ QSlider::groove:Horizontal#horizontalSlider_music
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout">
+           <property name="spacing">
+            <number>8</number>
+           </property>
            <property name="bottomMargin">
             <number>10</number>
            </property>
@@ -332,22 +346,22 @@ QSlider::groove:Horizontal#horizontalSlider_music
             <widget class="QPushButton" name="pushButton">
              <property name="minimumSize">
               <size>
-               <width>32</width>
-               <height>32</height>
+               <width>40</width>
+               <height>40</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>32</width>
-               <height>32</height>
+               <width>40</width>
+               <height>40</height>
               </size>
              </property>
              <property name="text">
               <string/>
              </property>
              <property name="icon">
-              <iconset resource="QTMusicPlayer.qrc">
-               <normaloff>:/QTMusicPlayer/zuixiaohua.png</normaloff>:/QTMusicPlayer/zuixiaohua.png</iconset>
+              <iconset resource="res.qrc">
+               <normaloff>:/res/zuixiaohua.png</normaloff>:/res/zuixiaohua.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -361,14 +375,14 @@ QSlider::groove:Horizontal#horizontalSlider_music
             <widget class="QPushButton" name="close">
              <property name="minimumSize">
               <size>
-               <width>32</width>
-               <height>32</height>
+               <width>40</width>
+               <height>40</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>32</width>
-               <height>32</height>
+               <width>40</width>
+               <height>40</height>
               </size>
              </property>
              <property name="styleSheet">
@@ -381,8 +395,8 @@ QSlider::groove:Horizontal#horizontalSlider_music
               <string/>
              </property>
              <property name="icon">
-              <iconset resource="QTMusicPlayer.qrc">
-               <normaloff>:/QTMusicPlayer/guanbi.png</normaloff>:/QTMusicPlayer/guanbi.png</iconset>
+              <iconset resource="res.qrc">
+               <normaloff>:/res/guanbi.png</normaloff>:/res/guanbi.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -398,7 +412,7 @@ QSlider::groove:Horizontal#horizontalSlider_music
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="widget_8" native="true">
+       <widget class="QWidget" name="list" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -745,7 +759,7 @@ Line{
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="widget" native="true">
+       <widget class="QWidget" name="control" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -866,8 +880,8 @@ Line{
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="QTMusicPlayer.qrc">
-                <normaloff>:/QTMusicPlayer/wenjianjia.png</normaloff>:/QTMusicPlayer/wenjianjia.png</iconset>
+               <iconset resource="res.qrc">
+                <normaloff>:/res/wenjianjia.png</normaloff>:/res/wenjianjia.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -917,8 +931,8 @@ Line{
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="QTMusicPlayer.qrc">
-                <normaloff>:/QTMusicPlayer/shangyishou.png</normaloff>:/QTMusicPlayer/shangyishou.png</iconset>
+               <iconset resource="res.qrc">
+                <normaloff>:/res/shangyishou.png</normaloff>:/res/shangyishou.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -952,9 +966,9 @@ Line{
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="QTMusicPlayer.qrc">
-                <normaloff>:/QTMusicPlayer/bofang.png</normaloff>
-                <normalon>:/QTMusicPlayer/zanting.png</normalon>:/QTMusicPlayer/bofang.png</iconset>
+               <iconset resource="res.qrc">
+                <normaloff>:/res/bofang.png</normaloff>
+                <normalon>:/res/zanting.png</normalon>:/res/bofang.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -991,8 +1005,8 @@ Line{
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="QTMusicPlayer.qrc">
-                <normaloff>:/QTMusicPlayer/xiayishou.png</normaloff>:/QTMusicPlayer/xiayishou.png</iconset>
+               <iconset resource="res.qrc">
+                <normaloff>:/res/xiayishou.png</normaloff>:/res/xiayishou.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1042,9 +1056,9 @@ Line{
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="QTMusicPlayer.qrc">
-                <normaloff>:/QTMusicPlayer/yinliang.png</normaloff>
-                <normalon>:/QTMusicPlayer/jingyin.png</normalon>:/QTMusicPlayer/yinliang.png</iconset>
+               <iconset resource="res.qrc">
+                <normaloff>:/res/yinliang.png</normaloff>
+                <normalon>:/res/jingyin.png</normalon>:/res/yinliang.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1128,8 +1142,8 @@ Line{
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="QTMusicPlayer.qrc">
-                <normaloff>:/QTMusicPlayer/xiazai.png</normaloff>:/QTMusicPlayer/xiazai.png</iconset>
+               <iconset resource="res.qrc">
+                <normaloff>:/res/xiazai.png</normaloff>:/res/xiazai.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1296,7 +1310,7 @@ Line{
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="QTMusicPlayer.qrc"/>
+  <include location="res.qrc"/>
  </resources>
  <connections/>
 </ui>

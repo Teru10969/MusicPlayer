@@ -20,4 +20,5 @@ HEADERS  += musicplayer.h
 FORMS    += musicplayer.ui
 
 RESOURCES += \
-    QTMusicPlayer.qrc
+    res.qrc \
+    res/res.qrc

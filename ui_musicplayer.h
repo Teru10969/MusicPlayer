@@ -33,7 +33,7 @@ public:
     QHBoxLayout *horizontalLayout_7;
     QWidget *widget_3;
     QVBoxLayout *verticalLayout_2;
-    QWidget *widget_2;
+    QWidget *head;
     QHBoxLayout *horizontalLayout_4;
     QWidget *widget_9;
     QLabel *label;
@@ -47,7 +47,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButton;
     QPushButton *close;
-    QWidget *widget_8;
+    QWidget *list;
     QHBoxLayout *horizontalLayout_6;
     QListWidget *option;
     QStackedWidget *stackedWidget;
@@ -60,7 +60,7 @@ public:
     QWidget *page3;
     QHBoxLayout *horizontalLayout_10;
     QTableWidget *HistoryList;
-    QWidget *widget;
+    QWidget *control;
     QVBoxLayout *verticalLayout;
     QWidget *widget_5;
     QHBoxLayout *horizontalLayout_2;
@@ -99,7 +99,8 @@ public:
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/QTMusicPlayer/logo.jpg"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         musicplayer->setWindowIcon(icon);
-        musicplayer->setStyleSheet(QString::fromUtf8("#widget_3{border-image: url(:/QTMusicPlayer/wallpaper.png);}\n"
+        musicplayer->setStyleSheet(QString::fromUtf8("#widget_3{border-image: url(:/res/wallpaper1.png);}\n"
+"\n"
 "QPushButton {\n"
 "    border: none;\n"
 "    border-radius:10px\n"
@@ -129,7 +130,7 @@ public:
         horizontalLayout_7->setSpacing(0);
         horizontalLayout_7->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_7->setObjectName("horizontalLayout_7");
-        horizontalLayout_7->setContentsMargins(0, 0, 1, 0);
+        horizontalLayout_7->setContentsMargins(0, 0, 0, 0);
         widget_3 = new QWidget(musicplayer);
         widget_3->setObjectName("widget_3");
         sizePolicy.setHeightForWidth(widget_3->sizePolicy().hasHeightForWidth());
@@ -141,20 +142,21 @@ public:
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName("verticalLayout_2");
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        widget_2 = new QWidget(widget_3);
-        widget_2->setObjectName("widget_2");
+        head = new QWidget(widget_3);
+        head->setObjectName("head");
         QSizePolicy sizePolicy1(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(widget_2->sizePolicy().hasHeightForWidth());
-        widget_2->setSizePolicy(sizePolicy1);
-        widget_2->setLayoutDirection(Qt::LeftToRight);
-        horizontalLayout_4 = new QHBoxLayout(widget_2);
+        sizePolicy1.setHeightForWidth(head->sizePolicy().hasHeightForWidth());
+        head->setSizePolicy(sizePolicy1);
+        head->setMinimumSize(QSize(0, 60));
+        head->setLayoutDirection(Qt::LeftToRight);
+        horizontalLayout_4 = new QHBoxLayout(head);
         horizontalLayout_4->setSpacing(0);
         horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_4->setObjectName("horizontalLayout_4");
         horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
-        widget_9 = new QWidget(widget_2);
+        widget_9 = new QWidget(head);
         widget_9->setObjectName("widget_9");
         widget_9->setEnabled(true);
         QSizePolicy sizePolicy2(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Preferred);
@@ -162,14 +164,16 @@ public:
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(widget_9->sizePolicy().hasHeightForWidth());
         widget_9->setSizePolicy(sizePolicy2);
-        widget_9->setMinimumSize(QSize(40, 40));
+        widget_9->setMinimumSize(QSize(60, 60));
         widget_9->setMaximumSize(QSize(900, 900));
-        widget_9->setStyleSheet(QString::fromUtf8("image: url(:/QTMusicPlayer/Music.svg);"));
+        widget_9->setStyleSheet(QString::fromUtf8("image: url(:/res/One Last Kiss.jpg);"));
 
         horizontalLayout_4->addWidget(widget_9);
 
-        label = new QLabel(widget_2);
+        label = new QLabel(head);
         label->setObjectName("label");
+        label->setStyleSheet(QString::fromUtf8("font: 20pt \"Mistral\";\n"
+"font-color:rgb(85, 85, 127);"));
         label->setTextFormat(Qt::PlainText);
 
         horizontalLayout_4->addWidget(label);
@@ -178,7 +182,7 @@ public:
 
         horizontalLayout_4->addItem(horizontalSpacer_2);
 
-        widget_4 = new QWidget(widget_2);
+        widget_4 = new QWidget(head);
         widget_4->setObjectName("widget_4");
         sizePolicy2.setHeightForWidth(widget_4->sizePolicy().hasHeightForWidth());
         widget_4->setSizePolicy(sizePolicy2);
@@ -196,22 +200,22 @@ public:
         widget_7->setMinimumSize(QSize(0, 40));
         search = new QPushButton(widget_7);
         search->setObjectName("search");
-        search->setGeometry(QRect(400, 2, 32, 32));
+        search->setGeometry(QRect(390, 10, 40, 40));
         sizePolicy.setHeightForWidth(search->sizePolicy().hasHeightForWidth());
         search->setSizePolicy(sizePolicy);
-        search->setMinimumSize(QSize(32, 32));
-        search->setMaximumSize(QSize(32, 32));
+        search->setMinimumSize(QSize(40, 40));
+        search->setMaximumSize(QSize(40, 40));
         QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/QTMusicPlayer/chazhao.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon1.addFile(QString::fromUtf8(":/res/chazhao.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         search->setIcon(icon1);
         search->setAutoDefault(false);
         searchline = new QLineEdit(widget_7);
         searchline->setObjectName("searchline");
-        searchline->setGeometry(QRect(90, 2, 341, 32));
+        searchline->setGeometry(QRect(30, 10, 400, 40));
         sizePolicy.setHeightForWidth(searchline->sizePolicy().hasHeightForWidth());
         searchline->setSizePolicy(sizePolicy);
-        searchline->setMinimumSize(QSize(0, 32));
-        searchline->setMaximumSize(QSize(16777215, 32));
+        searchline->setMinimumSize(QSize(0, 40));
+        searchline->setMaximumSize(QSize(16777215, 40));
         searchline->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
         searchline->raise();
         search->raise();
@@ -226,30 +230,30 @@ public:
         horizontalLayout_4->addItem(horizontalSpacer);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(6);
+        horizontalLayout->setSpacing(8);
         horizontalLayout->setObjectName("horizontalLayout");
         horizontalLayout->setContentsMargins(-1, -1, -1, 10);
-        pushButton = new QPushButton(widget_2);
+        pushButton = new QPushButton(head);
         pushButton->setObjectName("pushButton");
-        pushButton->setMinimumSize(QSize(32, 32));
-        pushButton->setMaximumSize(QSize(32, 32));
+        pushButton->setMinimumSize(QSize(40, 40));
+        pushButton->setMaximumSize(QSize(40, 40));
         QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/QTMusicPlayer/zuixiaohua.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon2.addFile(QString::fromUtf8(":/res/zuixiaohua.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         pushButton->setIcon(icon2);
         pushButton->setIconSize(QSize(23, 23));
 
         horizontalLayout->addWidget(pushButton);
 
-        close = new QPushButton(widget_2);
+        close = new QPushButton(head);
         close->setObjectName("close");
-        close->setMinimumSize(QSize(32, 32));
-        close->setMaximumSize(QSize(32, 32));
+        close->setMinimumSize(QSize(40, 40));
+        close->setMaximumSize(QSize(40, 40));
         close->setStyleSheet(QString::fromUtf8("QPushButton:hover {\n"
 "	\n"
 "	background-color: rgb(255, 0, 0);\n"
 "}"));
         QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/QTMusicPlayer/guanbi.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon3.addFile(QString::fromUtf8(":/res/guanbi.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         close->setIcon(icon3);
         close->setIconSize(QSize(23, 23));
 
@@ -262,21 +266,21 @@ public:
         horizontalLayout_4->setStretch(3, 2);
         horizontalLayout_4->setStretch(4, 1);
 
-        verticalLayout_2->addWidget(widget_2);
+        verticalLayout_2->addWidget(head);
 
-        widget_8 = new QWidget(widget_3);
-        widget_8->setObjectName("widget_8");
+        list = new QWidget(widget_3);
+        list->setObjectName("list");
         QSizePolicy sizePolicy3(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Expanding);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(widget_8->sizePolicy().hasHeightForWidth());
-        widget_8->setSizePolicy(sizePolicy3);
-        horizontalLayout_6 = new QHBoxLayout(widget_8);
+        sizePolicy3.setHeightForWidth(list->sizePolicy().hasHeightForWidth());
+        list->setSizePolicy(sizePolicy3);
+        horizontalLayout_6 = new QHBoxLayout(list);
         horizontalLayout_6->setSpacing(6);
         horizontalLayout_6->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_6->setObjectName("horizontalLayout_6");
         horizontalLayout_6->setContentsMargins(0, 0, 0, 0);
-        option = new QListWidget(widget_8);
+        option = new QListWidget(list);
         new QListWidgetItem(option);
         QBrush brush(QColor(0, 0, 0, 255));
         brush.setStyle(Qt::NoBrush);
@@ -323,7 +327,7 @@ public:
 
         horizontalLayout_6->addWidget(option);
 
-        stackedWidget = new QStackedWidget(widget_8);
+        stackedWidget = new QStackedWidget(list);
         stackedWidget->setObjectName("stackedWidget");
         page1 = new QWidget();
         page1->setObjectName("page1");
@@ -528,20 +532,20 @@ public:
         horizontalLayout_6->setStretch(0, 1);
         horizontalLayout_6->setStretch(1, 4);
 
-        verticalLayout_2->addWidget(widget_8);
+        verticalLayout_2->addWidget(list);
 
-        widget = new QWidget(widget_3);
-        widget->setObjectName("widget");
-        sizePolicy1.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
-        widget->setSizePolicy(sizePolicy1);
-        widget->setMinimumSize(QSize(0, 0));
-        widget->setMaximumSize(QSize(16777215, 80));
-        verticalLayout = new QVBoxLayout(widget);
+        control = new QWidget(widget_3);
+        control->setObjectName("control");
+        sizePolicy1.setHeightForWidth(control->sizePolicy().hasHeightForWidth());
+        control->setSizePolicy(sizePolicy1);
+        control->setMinimumSize(QSize(0, 0));
+        control->setMaximumSize(QSize(16777215, 80));
+        verticalLayout = new QVBoxLayout(control);
         verticalLayout->setSpacing(0);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName("verticalLayout");
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        widget_5 = new QWidget(widget);
+        widget_5 = new QWidget(control);
         widget_5->setObjectName("widget_5");
         sizePolicy1.setHeightForWidth(widget_5->sizePolicy().hasHeightForWidth());
         widget_5->setSizePolicy(sizePolicy1);
@@ -566,7 +570,7 @@ public:
         load->setMinimumSize(QSize(32, 32));
         load->setMaximumSize(QSize(32, 32));
         QIcon icon4;
-        icon4.addFile(QString::fromUtf8(":/QTMusicPlayer/wenjianjia.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon4.addFile(QString::fromUtf8(":/res/wenjianjia.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         load->setIcon(icon4);
         load->setIconSize(QSize(32, 32));
 
@@ -583,7 +587,7 @@ public:
         previous->setMinimumSize(QSize(32, 32));
         previous->setMaximumSize(QSize(32, 32));
         QIcon icon5;
-        icon5.addFile(QString::fromUtf8(":/QTMusicPlayer/shangyishou.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon5.addFile(QString::fromUtf8(":/res/shangyishou.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         previous->setIcon(icon5);
         previous->setIconSize(QSize(26, 26));
 
@@ -596,8 +600,8 @@ public:
         play->setMinimumSize(QSize(32, 32));
         play->setMaximumSize(QSize(32, 32));
         QIcon icon6;
-        icon6.addFile(QString::fromUtf8(":/QTMusicPlayer/bofang.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        icon6.addFile(QString::fromUtf8(":/QTMusicPlayer/zanting.png"), QSize(), QIcon::Mode::Normal, QIcon::State::On);
+        icon6.addFile(QString::fromUtf8(":/res/bofang.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon6.addFile(QString::fromUtf8(":/res/zanting.png"), QSize(), QIcon::Mode::Normal, QIcon::State::On);
         play->setIcon(icon6);
         play->setIconSize(QSize(40, 40));
         play->setCheckable(true);
@@ -611,7 +615,7 @@ public:
         next->setMinimumSize(QSize(32, 32));
         next->setMaximumSize(QSize(32, 32));
         QIcon icon7;
-        icon7.addFile(QString::fromUtf8(":/QTMusicPlayer/xiayishou.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon7.addFile(QString::fromUtf8(":/res/xiayishou.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         next->setIcon(icon7);
         next->setIconSize(QSize(26, 26));
 
@@ -628,8 +632,8 @@ public:
         voice->setMinimumSize(QSize(32, 32));
         voice->setMaximumSize(QSize(32, 32));
         QIcon icon8;
-        icon8.addFile(QString::fromUtf8(":/QTMusicPlayer/yinliang.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        icon8.addFile(QString::fromUtf8(":/QTMusicPlayer/jingyin.png"), QSize(), QIcon::Mode::Normal, QIcon::State::On);
+        icon8.addFile(QString::fromUtf8(":/res/yinliang.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon8.addFile(QString::fromUtf8(":/res/jingyin.png"), QSize(), QIcon::Mode::Normal, QIcon::State::On);
         voice->setIcon(icon8);
         voice->setIconSize(QSize(32, 32));
         voice->setCheckable(true);
@@ -662,7 +666,7 @@ public:
         download->setMinimumSize(QSize(32, 32));
         download->setMaximumSize(QSize(32, 32));
         QIcon icon9;
-        icon9.addFile(QString::fromUtf8(":/QTMusicPlayer/xiazai.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon9.addFile(QString::fromUtf8(":/res/xiazai.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         download->setIcon(icon9);
         download->setIconSize(QSize(40, 40));
 
@@ -675,7 +679,7 @@ public:
 
         verticalLayout->addWidget(widget_5);
 
-        widget_6 = new QWidget(widget);
+        widget_6 = new QWidget(control);
         widget_6->setObjectName("widget_6");
         widget_6->setMaximumSize(QSize(16777215, 32));
         horizontalLayout_3 = new QHBoxLayout(widget_6);
@@ -722,7 +726,7 @@ public:
         verticalLayout->addWidget(widget_6);
 
 
-        verticalLayout_2->addWidget(widget);
+        verticalLayout_2->addWidget(control);
 
 
         horizontalLayout_7->addWidget(widget_3);
@@ -739,7 +743,7 @@ public:
     void retranslateUi(QWidget *musicplayer)
     {
         musicplayer->setWindowTitle(QCoreApplication::translate("musicplayer", "musicplayer", nullptr));
-        label->setText(QCoreApplication::translate("musicplayer", "TeruMusicPlayer", nullptr));
+        label->setText(QCoreApplication::translate("musicplayer", " TeruMusicPlayer", nullptr));
         search->setText(QString());
         pushButton->setText(QString());
         close->setText(QString());

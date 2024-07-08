@@ -297,7 +297,7 @@ Makefile: musicplayer_demo.pro ../../Qt/6.7.2/mingw_64/mkspecs/win32-g++/qmake.c
 		../../Qt/6.7.2/mingw_64/lib/Qt6Core.prl \
 		../../Qt/6.7.2/mingw_64/lib/Qt6EntryPoint.prl \
 		../../Qt/6.7.2/mingw_64/mkspecs/features/build_pass.prf \
-		QTMusicPlayer.qrc
+		res.qrc
 	$(QMAKE) -o Makefile musicplayer_demo.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 ../../Qt/6.7.2/mingw_64/mkspecs/features/spec_pre.prf:
 ../../Qt/6.7.2/mingw_64/mkspecs/features/device_config.prf:
@@ -526,7 +526,7 @@ musicplayer_demo.pro:
 ../../Qt/6.7.2/mingw_64/lib/Qt6Core.prl:
 ../../Qt/6.7.2/mingw_64/lib/Qt6EntryPoint.prl:
 ../../Qt/6.7.2/mingw_64/mkspecs/features/build_pass.prf:
-QTMusicPlayer.qrc:
+res.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile musicplayer_demo.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 

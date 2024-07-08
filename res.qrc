@@ -1,0 +1,46 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/bofang.png</file>
+        <file>res/bofangliebiao.png</file>
+        <file>res/chazhao.png</file>
+        <file>res/chuangkouzuidahua.png</file>
+        <file>res/danjiweixuanzhong.png</file>
+        <file>res/danjixuanzhong.png</file>
+        <file>res/danquxunhuan.png</file>
+        <file>res/download.png</file>
+        <file>res/geciweidianji.png</file>
+        <file>res/geciyidianji.png</file>
+        <file>res/gengduo.png</file>
+        <file>res/guanbi.png</file>
+        <file>res/hengxian.png</file>
+        <file>res/hua.png</file>
+        <file>res/jingyin.png</file>
+        <file>res/liebiao.png</file>
+        <file>res/logo1.jpg</file>
+        <file>res/logo2.jpg</file>
+        <file>res/logo3.jpg</file>
+        <file>res/Music.svg</file>
+        <file>res/pifu.png</file>
+        <file>res/pinglun.png</file>
+        <file>res/search.png</file>
+        <file>res/shangyishou.png</file>
+        <file>res/shixin.png</file>
+        <file>res/shunxubofang.png</file>
+        <file>res/suijibofang.png</file>
+        <file>res/wallpaper1.png</file>
+        <file>res/wallpaper2.jpg</file>
+        <file>res/wallpaper3.jpg</file>
+        <file>res/wallpaper4.jpg</file>
+        <file>res/wenjianjia.png</file>
+        <file>res/xiayishou.png</file>
+        <file>res/xiazai.png</file>
+        <file>res/xin.png</file>
+        <file>res/yinliang.png</file>
+        <file>res/yuandian.png</file>
+        <file>res/zanting.png</file>
+        <file>res/zengjia.png</file>
+        <file>res/zuidahua.png</file>
+        <file>res/zuixiaohua.png</file>
+        <file>res/One Last Kiss.jpg</file>
+    </qresource>
+</RCC>
