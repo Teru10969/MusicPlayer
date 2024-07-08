@@ -23,6 +23,7 @@ public:
     void updateCurrentPlayingItem();
     void connectDatabase();
     void upsertPlayHistory(const QString &songName);
+    void displayPlayHistory();
     // virtual void mouseMoveEvent(QMouseEvent* event);
     // virtual void mousePressEvent(QMouseEvent* event);
     // virtual void mouseReleaseEvent(QMouseEvent* event);
@@ -51,7 +52,7 @@ private slots:
 
     // void on_timeslider_sliderMoved(int position);
 
-    void on_LocalMusicList_itemClicked(QListWidgetItem *item);
+    // void on_LocalMusicList_itemClicked(QListWidgetItem *item);
 
     void on_option_currentRowChanged(int currentRow);
 
@@ -63,9 +64,11 @@ private:
     QAudioOutput* output;
     QMediaPlayer* player;
     QUrl currentMediaSource;
+    QWidget* currentwidget;
+    QListWidget* currentList;
     int index=0;
-    int saveposition;
     bool flag1;
+
     // QPoint z;
 };
 

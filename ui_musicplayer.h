@@ -13,6 +13,7 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
@@ -20,6 +21,7 @@
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStackedWidget>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -57,7 +59,7 @@ public:
     QListWidget *NetMusicList;
     QWidget *page3;
     QHBoxLayout *horizontalLayout_10;
-    QListWidget *HistoryList;
+    QTableWidget *HistoryList;
     QWidget *widget;
     QVBoxLayout *verticalLayout;
     QWidget *widget_5;
@@ -427,43 +429,95 @@ public:
         horizontalLayout_10->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_10->setObjectName("horizontalLayout_10");
         horizontalLayout_10->setContentsMargins(0, 0, 0, 0);
-        HistoryList = new QListWidget(page3);
+        HistoryList = new QTableWidget(page3);
+        if (HistoryList->columnCount() < 2)
+            HistoryList->setColumnCount(2);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        HistoryList->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        HistoryList->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         HistoryList->setObjectName("HistoryList");
-        HistoryList->setStyleSheet(QString::fromUtf8("QListWidget\n"
-"{\n"
-"	border:0px;\n"
+        HistoryList->setLayoutDirection(Qt::LeftToRight);
+        HistoryList->setStyleSheet(QString::fromUtf8("/* QTableWidget QSS */\n"
+"\n"
+"/* \350\241\250\345\244\264\346\240\267\345\274\217 */\n"
+"QHeaderView::section {\n"
+"    background-color: ; /* \347\273\277\350\211\262\350\203\214\346\231\257 */\n"
+"    color: ; /* \347\231\275\350\211\262\345\255\227\344\275\223 */\n"
+"    padding: 4px;\n"
+"    border: none; /* \346\227\240\350\276\271\346\241\206 */\n"
+"    font-size: 14px;\n"
+"}\n"
+"\n"
+"/* \350\241\250\346\240\274\345\206\205\345\256\271\346\240\267\345\274\217 */\n"
+"QTableWidget {\n"
+"  \n"
+"    border: none; /* \346\227\240\350\276\271\346\241\206 */\n"
+"    gridline-color: #ddd; /* \347\275\221\346\240\274\347\272\277\351\242\234\350\211\262 */\n"
+"    font-size: 14px;\n"
+"    selection-background-color: #4CAF50; /* \351\200\211\344\270\255\350\203\214\346\231\257\350\211\262 */\n"
+"    selection-color: white; /* \351\200\211\344\270\255\345\255\227\344\275\223\351\242\234\350\211\262 */\n"
 "    color:rgb(55,55,55);\n"
 "    padding-left:15px;	\n"
 "    padding-right:15px;	\n"
 "}\n"
-" \n"
-"/*\345\216\273\351\231\244\347\204\246\347\202\271\350\231\232\347\272\277*/\n"
-"*\n"
-"{\n"
-"	outline:0px;\n"
-"}\n"
-" \n"
-"QListWidget::Item\n"
-"{\n"
-"	height:50;\n"
-"    border:0px solid rgb(255,255,255);	\n"
+"\n"
+"/* \350\241\250"
+                        "\346\240\274\346\235\241\347\233\256\346\240\267\345\274\217 */\n"
+"QTableWidget::item {\n"
+"    padding: 4px;\n"
+"    height:50;\n"
+"	border:0px solid rgb(255,255,255);	\n"
 "	padding-top:1px;\n"
 "}\n"
-" \n"
-"QListWidget::Item:hover\n"
-"{\n"
-"	background-color: rgb(232, 232, 232);\n"
-"}\n"
 "\n"
-"/*\351\200\211\344\270\255*/\n"
-"QListWidget::Item:selected\n"
-"{\n"
-"	font: 75 16pt \"\351\230\277\351\207\214\345\246\210\345\246\210\346\225\260\351\273\221\344\275\223\";\n"
+"/* \350\241\250\346\240\274\346\235\241\347\233\256\351\200\211\344\270\255\346\240\267\345\274\217 */\n"
+"QTableWidget::item:selected {\n"
+"    font: 75 16pt \"\351\230\277\351\207\214\345\246\210\345\246\210\346\225\260\351\273\221\344\275\223\";\n"
 "	color:rgb(55,55,55);\n"
 "	border:0px;\n"
 "	background:rgb(221,221,221);	\n"
 "}\n"
-""));
+"\n"
+"/* \350\241\250\346\240\274\347\272\277\346\235\241\346\240\267\345\274\217 */\n"
+"QTableWidget QTableCornerButton::section {\n"
+"    background-color: transparent; /* \350\247\222\346\214\211\351\222\256\351\200\217\346\230\216\350\203\214\346\231\257 */\n"
+"}\n"
+"\n"
+"/* \346\273\232\345\212\250\346\235\241\346\240\267\345\274\217 */\n"
+"QScrollBar:vertical {\n"
+"    background: #f1f1f1;\n"
+"    width: 12px;\n"
+"    margin: 22px 0 22px 0;\n"
+"}\n"
+"\n"
+"QScrollBar::han"
+                        "dle:vertical {\n"
+"    background: #888;\n"
+"    min-height: 20px;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical,\n"
+"QScrollBar::sub-line:vertical {\n"
+"    background: none;\n"
+"    height: 20px;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
+"    background: none;\n"
+"}\n"
+"\n"
+"Line{\n"
+"	height:5\n"
+"	background-color: rgba(255, 255, 255, 0);\n"
+"	border-top:2px solid #52DCFE;\n"
+"}"));
+        HistoryList->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        HistoryList->horizontalHeader()->setVisible(true);
+        HistoryList->verticalHeader()->setVisible(false);
+        HistoryList->verticalHeader()->setCascadingSectionResizes(false);
 
         horizontalLayout_10->addWidget(HistoryList);
 
@@ -676,7 +730,7 @@ public:
 
         retranslateUi(musicplayer);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(musicplayer);
@@ -700,6 +754,10 @@ public:
         ___qlistwidgetitem2->setText(QCoreApplication::translate("musicplayer", "\345\216\206\345\217\262\346\222\255\346\224\276", nullptr));
         option->setSortingEnabled(__sortingEnabled);
 
+        QTableWidgetItem *___qtablewidgetitem = HistoryList->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QCoreApplication::translate("musicplayer", "\346\255\214\346\233\262", nullptr));
+        QTableWidgetItem *___qtablewidgetitem1 = HistoryList->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QCoreApplication::translate("musicplayer", "\346\222\255\346\224\276\346\227\266\351\227\264", nullptr));
         load->setText(QString());
         previous->setText(QString());
         play->setText(QString());

@@ -21,6 +21,9 @@
 
 #include <QListWidget>
 #include <QListWidgetItem>
+#include <QTableWidget>
+#include <QTableWidgetItem>
+
 #include <QMessageBox>
 #include <QBrush>
 #include <QColor>
@@ -30,11 +33,14 @@ musicplayer::musicplayer(QWidget *parent) :
     ui(new Ui::musicplayer)
 {
     ui->setupUi(this);
-    setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
+    // setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
     output=new QAudioOutput(this);
     player=new QMediaPlayer(this);
     player->setAudioOutput(output);
+    musicplayer::connectDatabase();
     ui->stackedWidget->setCurrentIndex(0);
+    currentwidget=ui->stackedWidget->currentWidget();
+    currentList=currentwidget->findChild<QListWidget *>();
     connect(player,&QMediaPlayer::durationChanged,this,[=](qint64 duration){//音乐总时长
         ui->time2->setText(QString("%1:%2")
         .arg(duration/1000/60,2,10,QChar('0'))
@@ -49,22 +55,24 @@ musicplayer::musicplayer(QWidget *parent) :
         .arg(position/1000%60,2,10,QChar('0')));
         ui->timeslider->setSliderPosition(position);
     });
-    connect(ui->timeslider, &QSlider::valueChanged, this, [=](qint64 position) { // 播放时刻随进度条值改变
+    connect(ui->timeslider, &QSlider::valueChanged,this,[=](qint64 position) { // 播放时刻随进度条值改变
         ui->time1->setText(QString("%1:%2")
         .arg(position / 1000 / 60, 2, 10, QChar('0'))
         .arg(position / 1000 % 60, 2, 10, QChar('0')));
     });
     connect(player,&QMediaPlayer::playingChanged,ui->play,&QPushButton::setChecked);
-    connect(player, &QMediaPlayer::sourceChanged, [&](const QUrl &mediaSource) {
+
+    connect(player, &QMediaPlayer::sourceChanged,this,[&](const QUrl &mediaSource) {
         currentMediaSource = mediaSource;
         flag1=true;
     });
     connect(player,&QMediaPlayer::playingChanged,this,[=](bool flag2){
-        if(flag1&&flag2){
+        if(flag1&&flag2){//当媒体源开始播放，使用槽函数添加历史记录
             musicplayer::on_MediaSourceChanged(currentMediaSource);
             flag1=false;
         }
     });
+    musicplayer::displayPlayHistory();
      // ui->listWidget->item(0)->setForeground(Qt::red);
      // ui->listWidget_2->item(0)->setForeground(Qt::red);
      // qDebug()<<ui->listWidget->item(0)->text();
@@ -124,7 +132,7 @@ void musicplayer::on_load_clicked()//导入本地音乐文件
         return;
     }
     ui->LocalMusiclist->addItems(newMusicList);
-    for(QString file:musiclist)//使用范围循环遍历musiclist中的每个文件名
+    // for(QString file:musiclist)使用范围循环遍历musiclist中的每个文件名
     // playList.append(QUrl::fromLocalFile(path+"/"+file)); //文件放入播放列表里
 
     // 检查播放列表是否为空
@@ -135,13 +143,11 @@ void musicplayer::on_load_clicked()//导入本地音乐文件
     }
 
     player->setSource(playList[index]);
-    ui->LocalMusiclist->setCurrentRow(0);
+    // ui->LocalMusiclist->setCurrentRow(0);
 }
 
 void musicplayer::updateCurrentPlayingItem()
-{
-    QWidget* currentwidget=ui->stackedWidget->currentWidget();
-    QListWidget* currentList=currentwidget->findChild<QListWidget *>();
+{  
     for (int i = 0; i < ui->LocalMusiclist->count(); i++) {
         if (i == index) {
             ui->LocalMusiclist->item(i)->setForeground(Qt::red);
@@ -156,9 +162,9 @@ void musicplayer::updateCurrentPlayingItem()
 
 void musicplayer::on_play_clicked()//播放暂停音乐
 {
-    // 检查是否选中了音乐
-    if (ui->LocalMusiclist->currentRow() == -1) {
-        QMessageBox::information(this, "提示", "请先选择一首音乐");
+    //检查列表中是否有音乐可播放
+    if (currentList->count()==0) {
+        QMessageBox::information(this, "提示", "播放列表为空");
         ui->play->setChecked(false);
         return;
     }
@@ -167,7 +173,8 @@ void musicplayer::on_play_clicked()//播放暂停音乐
     case QMediaPlayer::PlaybackState::StoppedState://停止状态 播放当前选中音乐
     {
         // ui->play->setChecked(true);
-        index=ui->LocalMusiclist->currentRow();
+        if(currentList->currentRow()==-1); //如果未选择歌曲，不处理，默认播放第一个
+        else index=currentList->currentRow(); //播放选择的音乐
         player->setSource(playList[index]);
         player->play();
         updateCurrentPlayingItem();
@@ -226,7 +233,7 @@ void musicplayer::on_next_clicked()//下一曲
 
 void musicplayer::on_LocalMusiclist_itemDoubleClicked(QListWidgetItem *item)
 {
-    index =ui->LocalMusiclist->row(item); // 获取双击项目的索引
+    index =currentList->row(item); // 获取双击项目的索引
     player->setSource(playList[index]); // 设置媒体源为选中的 URL
     updateCurrentPlayingItem();
     item->setForeground(Qt::red);
@@ -261,7 +268,7 @@ void musicplayer::on_volumeslider_sliderPressed()
 {
     float position=ui->volumeslider->value();
     float volume=position/100;
-    qDebug()<<volume;
+    // qDebug()<<volume;
     output->setVolume(volume);
 }
 
@@ -273,10 +280,10 @@ void musicplayer::on_voice_clicked()
 
 
 
-void musicplayer::on_LocalMusicList_itemClicked(QListWidgetItem *item)
-{
-    ui->LocalMusiclist->setCurrentItem(item);
-}
+// void musicplayer::on_LocalMusicList_itemClicked(QListWidgetItem *item)
+// {
+//     ui->LocalMusiclist->setCurrentItem(item);
+// }
 
 
 
@@ -286,8 +293,16 @@ void musicplayer::on_option_currentRowChanged(int currentRow)
     ui->stackedWidget->setCurrentIndex(currentRow);
 }
 
-
-void musicplayer::upsertPlayHistory(const QString &songName){
+void musicplayer::connectDatabase(){
+    QSqlDatabase db=QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("MusicPlayer.db");
+    if(!db.open()){
+        qDebug() << "Error: connection with database fail";
+    } else {
+        qDebug() << "Database: connection ok";
+    }
+}
+void musicplayer::upsertPlayHistory(const QString &songName){ //更新播放记录到数据库
     QSqlQuery query;
     // 检查歌曲是否已经存在
     query.prepare("SELECT id FROM PlayHistory WHERE song_name = :song_name");
@@ -297,7 +312,7 @@ void musicplayer::upsertPlayHistory(const QString &songName){
     if (query.next()) {
         // 如果存在，更新播放时间
         int id = query.value(0).toInt();
-        query.prepare("UPDATE PlayHistory SET play_time = CURRENT_TIMESTAMP WHERE id = :id");
+        query.prepare("UPDATE PlayHistory SET play_time = (datetime(CURRENT_TIMESTAMP, 'localtime')) WHERE id = :id");
         query.bindValue(":id", id);
     } else {
         // 如果不存在，插入新记录
@@ -312,8 +327,31 @@ void musicplayer::upsertPlayHistory(const QString &songName){
     }
 }
 
-void musicplayer::on_MediaSourceChanged(const QUrl &mediaSource) {
+void musicplayer::on_MediaSourceChanged(const QUrl &mediaSource) { //媒体源切换槽函数
     // 从媒体源URL中提取歌曲名称（假设歌曲名称是文件名的一部分）
     QString songName = mediaSource.fileName();
     musicplayer::upsertPlayHistory(songName);
+    displayPlayHistory();//更新历史记录界面
+}
+
+void musicplayer::displayPlayHistory() { //显示历史播放记录
+    QSqlQuery query;
+    query.exec("SELECT song_name, play_time FROM PlayHistory ORDER BY play_time DESC");
+
+     // 清除现有条目
+    ui->HistoryList->setRowCount(0);
+    int row = 0;
+
+    while (query.next()) {
+        QString songName = query.value(0).toString();
+        QString playTime = query.value(1).toString();
+        ui->HistoryList->insertRow(row);
+        ui->HistoryList->setItem(row,0,new QTableWidgetItem(songName));
+        ui->HistoryList->setItem(row,1,new QTableWidgetItem(playTime));
+        row++;
+    }
+
+    ui->HistoryList->resizeRowsToContents();
+    ui->HistoryList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//填充列宽
+    ui->HistoryList->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);// 根据内容设置所有行高
 }
