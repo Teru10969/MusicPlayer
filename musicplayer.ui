@@ -57,7 +57,10 @@ QSlider::groove:Horizontal#horizontalSlider_music
 }
 </string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout_7">
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -70,10 +73,7 @@ QSlider::groove:Horizontal#horizontalSlider_music
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <property name="spacing">
-    <number>0</number>
-   </property>
-   <item row="0" column="0">
+   <item>
     <widget class="QWidget" name="widget_3" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -422,7 +422,7 @@ QSlider::groove:Horizontal#horizontalSlider_music
           <number>0</number>
          </property>
          <item>
-          <widget class="QListWidget" name="listWidget_2">
+          <widget class="QListWidget" name="option">
            <property name="styleSheet">
             <string notr="true">QListWidget
 {
@@ -488,12 +488,36 @@ QListWidget::Item:selected
           </widget>
          </item>
          <item>
-          <widget class="QListWidget" name="listWidget">
-           <property name="styleSheet">
-            <string notr="true">QListWidget
+          <widget class="QStackedWidget" name="stackedWidget">
+           <property name="currentIndex">
+            <number>1</number>
+           </property>
+           <widget class="QWidget" name="page1">
+            <layout class="QHBoxLayout" name="horizontalLayout_8">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QListWidget" name="LocalMusiclist">
+               <property name="styleSheet">
+                <string notr="true">QListWidget
 {
 	border:0px;
-	
+    color:rgb(55,55,55);
+    padding-left:15px;	
+    padding-right:15px;	
 }
  
 /*去除焦点虚线*/
@@ -523,10 +547,134 @@ QListWidget::Item:selected
 	background:rgb(221,221,221);	
 }
 </string>
-           </property>
-           <property name="selectionRectVisible">
-            <bool>false</bool>
-           </property>
+               </property>
+               <property name="selectionRectVisible">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="page2">
+            <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QListWidget" name="NetMusicList">
+               <property name="styleSheet">
+                <string notr="true">QListWidget
+{
+	border:0px;
+    color:rgb(55,55,55);
+    padding-left:15px;	
+    padding-right:15px;	
+}
+ 
+/*去除焦点虚线*/
+*
+{
+	outline:0px;
+}
+ 
+QListWidget::Item
+{
+	height:50;
+    border:0px solid rgb(255,255,255);	
+	padding-top:1px;
+}
+ 
+QListWidget::Item:hover
+{
+	background-color: rgb(232, 232, 232);
+}
+
+/*选中*/
+QListWidget::Item:selected
+{
+	font: 75 16pt &quot;阿里妈妈数黑体&quot;;
+	color:rgb(55,55,55);
+	border:0px;
+	background:rgb(221,221,221);	
+}
+</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="page3">
+            <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QListWidget" name="HistoryList">
+               <property name="styleSheet">
+                <string notr="true">QListWidget
+{
+	border:0px;
+    color:rgb(55,55,55);
+    padding-left:15px;	
+    padding-right:15px;	
+}
+ 
+/*去除焦点虚线*/
+*
+{
+	outline:0px;
+}
+ 
+QListWidget::Item
+{
+	height:50;
+    border:0px solid rgb(255,255,255);	
+	padding-top:1px;
+}
+ 
+QListWidget::Item:hover
+{
+	background-color: rgb(232, 232, 232);
+}
+
+/*选中*/
+QListWidget::Item:selected
+{
+	font: 75 16pt &quot;阿里妈妈数黑体&quot;;
+	color:rgb(55,55,55);
+	border:0px;
+	background:rgb(221,221,221);	
+}
+</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </widget>
          </item>
         </layout>
@@ -608,7 +756,23 @@ QListWidget::Item:selected
               </property>
               <property name="sizeHint" stdset="0">
                <size>
-                <width>340</width>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_10">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Preferred</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>120</width>
                 <height>20</height>
                </size>
               </property>
@@ -617,7 +781,7 @@ QListWidget::Item:selected
             <item>
              <widget class="QPushButton" name="load">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -655,7 +819,7 @@ QListWidget::Item:selected
                <enum>Qt::Horizontal</enum>
               </property>
               <property name="sizeType">
-               <enum>QSizePolicy::Fixed</enum>
+               <enum>QSizePolicy::Preferred</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -668,7 +832,7 @@ QListWidget::Item:selected
             <item alignment="Qt::AlignHCenter">
              <widget class="QPushButton" name="previous">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -703,7 +867,7 @@ QListWidget::Item:selected
             <item alignment="Qt::AlignHCenter">
              <widget class="QPushButton" name="play">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -742,7 +906,7 @@ QListWidget::Item:selected
             <item alignment="Qt::AlignHCenter">
              <widget class="QPushButton" name="next">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -780,7 +944,7 @@ QListWidget::Item:selected
                <enum>Qt::Horizontal</enum>
               </property>
               <property name="sizeType">
-               <enum>QSizePolicy::Fixed</enum>
+               <enum>QSizePolicy::Preferred</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -793,7 +957,7 @@ QListWidget::Item:selected
             <item>
              <widget class="QPushButton" name="voice">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -866,7 +1030,7 @@ QListWidget::Item:selected
                <enum>Qt::Horizontal</enum>
               </property>
               <property name="sizeType">
-               <enum>QSizePolicy::Expanding</enum>
+               <enum>QSizePolicy::Preferred</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -879,7 +1043,7 @@ QListWidget::Item:selected
             <item>
              <widget class="QPushButton" name="download">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>

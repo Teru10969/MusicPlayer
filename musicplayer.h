@@ -6,6 +6,9 @@
 #include <QWidget>
 #include <QList>
 #include <QListWidget>
+#include <QPoint>
+#include <QSqlQuery>
+#include <QString>
 namespace Ui {
 class musicplayer;
 }
@@ -18,6 +21,11 @@ public:
     explicit musicplayer(QWidget *parent = 0);
     ~musicplayer();
     void updateCurrentPlayingItem();
+    void connectDatabase();
+    void upsertPlayHistory(const QString &songName);
+    // virtual void mouseMoveEvent(QMouseEvent* event);
+    // virtual void mousePressEvent(QMouseEvent* event);
+    // virtual void mouseReleaseEvent(QMouseEvent* event);
 
 private slots:
 
@@ -29,7 +37,7 @@ private slots:
 
     void on_play_clicked();
 
-    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
+    void on_LocalMusiclist_itemDoubleClicked(QListWidgetItem *item);
 
     void on_timeslider_sliderReleased();
 
@@ -43,15 +51,22 @@ private slots:
 
     // void on_timeslider_sliderMoved(int position);
 
-    void on_listWidget_itemClicked(QListWidgetItem *item);
+    void on_LocalMusicList_itemClicked(QListWidgetItem *item);
+
+    void on_option_currentRowChanged(int currentRow);
+
+    void on_MediaSourceChanged(const QUrl &mediaSource);
 
 private:
     Ui::musicplayer *ui;
     QList<QUrl> playList;
     QAudioOutput* output;
     QMediaPlayer* player;
+    QUrl currentMediaSource;
     int index=0;
     int saveposition;
+    bool flag1;
+    // QPoint z;
 };
 
 #endif // MUSICPLAYER_H

@@ -12,7 +12,6 @@
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -20,6 +19,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -28,7 +28,7 @@ QT_BEGIN_NAMESPACE
 class Ui_musicplayer
 {
 public:
-    QGridLayout *gridLayout;
+    QHBoxLayout *horizontalLayout_7;
     QWidget *widget_3;
     QVBoxLayout *verticalLayout_2;
     QWidget *widget_2;
@@ -47,13 +47,23 @@ public:
     QPushButton *close;
     QWidget *widget_8;
     QHBoxLayout *horizontalLayout_6;
-    QListWidget *listWidget_2;
-    QListWidget *listWidget;
+    QListWidget *option;
+    QStackedWidget *stackedWidget;
+    QWidget *page1;
+    QHBoxLayout *horizontalLayout_8;
+    QListWidget *LocalMusiclist;
+    QWidget *page2;
+    QHBoxLayout *horizontalLayout_9;
+    QListWidget *NetMusicList;
+    QWidget *page3;
+    QHBoxLayout *horizontalLayout_10;
+    QListWidget *HistoryList;
     QWidget *widget;
     QVBoxLayout *verticalLayout;
     QWidget *widget_5;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer_8;
+    QSpacerItem *horizontalSpacer_10;
     QPushButton *load;
     QSpacerItem *horizontalSpacer_3;
     QPushButton *previous;
@@ -113,11 +123,11 @@ public:
 "	background:rgb(0, 255, 0);height:4px;\n"
 "}\n"
 ""));
-        gridLayout = new QGridLayout(musicplayer);
-        gridLayout->setSpacing(0);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName("gridLayout");
-        gridLayout->setContentsMargins(0, 0, 1, 0);
+        horizontalLayout_7 = new QHBoxLayout(musicplayer);
+        horizontalLayout_7->setSpacing(0);
+        horizontalLayout_7->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_7->setObjectName("horizontalLayout_7");
+        horizontalLayout_7->setContentsMargins(0, 0, 1, 0);
         widget_3 = new QWidget(musicplayer);
         widget_3->setObjectName("widget_3");
         sizePolicy.setHeightForWidth(widget_3->sizePolicy().hasHeightForWidth());
@@ -264,15 +274,15 @@ public:
         horizontalLayout_6->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_6->setObjectName("horizontalLayout_6");
         horizontalLayout_6->setContentsMargins(0, 0, 0, 0);
-        listWidget_2 = new QListWidget(widget_8);
-        new QListWidgetItem(listWidget_2);
+        option = new QListWidget(widget_8);
+        new QListWidgetItem(option);
         QBrush brush(QColor(0, 0, 0, 255));
         brush.setStyle(Qt::NoBrush);
-        QListWidgetItem *__qlistwidgetitem = new QListWidgetItem(listWidget_2);
+        QListWidgetItem *__qlistwidgetitem = new QListWidgetItem(option);
         __qlistwidgetitem->setBackground(brush);
-        new QListWidgetItem(listWidget_2);
-        listWidget_2->setObjectName("listWidget_2");
-        listWidget_2->setStyleSheet(QString::fromUtf8("QListWidget\n"
+        new QListWidgetItem(option);
+        option->setObjectName("option");
+        option->setStyleSheet(QString::fromUtf8("QListWidget\n"
 "{\n"
 "	border:0px;\n"
 "	color:rgb(55,55,55);\n"
@@ -309,14 +319,25 @@ public:
 "\n"
 ""));
 
-        horizontalLayout_6->addWidget(listWidget_2);
+        horizontalLayout_6->addWidget(option);
 
-        listWidget = new QListWidget(widget_8);
-        listWidget->setObjectName("listWidget");
-        listWidget->setStyleSheet(QString::fromUtf8("QListWidget\n"
+        stackedWidget = new QStackedWidget(widget_8);
+        stackedWidget->setObjectName("stackedWidget");
+        page1 = new QWidget();
+        page1->setObjectName("page1");
+        horizontalLayout_8 = new QHBoxLayout(page1);
+        horizontalLayout_8->setSpacing(0);
+        horizontalLayout_8->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_8->setObjectName("horizontalLayout_8");
+        horizontalLayout_8->setContentsMargins(0, 0, 0, 0);
+        LocalMusiclist = new QListWidget(page1);
+        LocalMusiclist->setObjectName("LocalMusiclist");
+        LocalMusiclist->setStyleSheet(QString::fromUtf8("QListWidget\n"
 "{\n"
 "	border:0px;\n"
-"	\n"
+"    color:rgb(55,55,55);\n"
+"    padding-left:15px;	\n"
+"    padding-right:15px;	\n"
 "}\n"
 " \n"
 "/*\345\216\273\351\231\244\347\204\246\347\202\271\350\231\232\347\272\277*/\n"
@@ -346,9 +367,109 @@ public:
 "	background:rgb(221,221,221);	\n"
 "}\n"
 ""));
-        listWidget->setSelectionRectVisible(false);
+        LocalMusiclist->setSelectionRectVisible(false);
 
-        horizontalLayout_6->addWidget(listWidget);
+        horizontalLayout_8->addWidget(LocalMusiclist);
+
+        stackedWidget->addWidget(page1);
+        page2 = new QWidget();
+        page2->setObjectName("page2");
+        horizontalLayout_9 = new QHBoxLayout(page2);
+        horizontalLayout_9->setSpacing(0);
+        horizontalLayout_9->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_9->setObjectName("horizontalLayout_9");
+        horizontalLayout_9->setContentsMargins(0, 0, 0, 0);
+        NetMusicList = new QListWidget(page2);
+        NetMusicList->setObjectName("NetMusicList");
+        NetMusicList->setStyleSheet(QString::fromUtf8("QListWidget\n"
+"{\n"
+"	border:0px;\n"
+"    color:rgb(55,55,55);\n"
+"    padding-left:15px;	\n"
+"    padding-right:15px;	\n"
+"}\n"
+" \n"
+"/*\345\216\273\351\231\244\347\204\246\347\202\271\350\231\232\347\272\277*/\n"
+"*\n"
+"{\n"
+"	outline:0px;\n"
+"}\n"
+" \n"
+"QListWidget::Item\n"
+"{\n"
+"	height:50;\n"
+"    border:0px solid rgb(255,255,255);	\n"
+"	padding-top:1px;\n"
+"}\n"
+" \n"
+"QListWidget::Item:hover\n"
+"{\n"
+"	background-color: rgb(232, 232, 232);\n"
+"}\n"
+"\n"
+"/*\351\200\211\344\270\255*/\n"
+"QListWidget::Item:selected\n"
+"{\n"
+"	font: 75 16pt \"\351\230\277\351\207\214\345\246\210\345\246\210\346\225\260\351\273\221\344\275\223\";\n"
+"	color:rgb(55,55,55);\n"
+"	border:0px;\n"
+"	background:rgb(221,221,221);	\n"
+"}\n"
+""));
+
+        horizontalLayout_9->addWidget(NetMusicList);
+
+        stackedWidget->addWidget(page2);
+        page3 = new QWidget();
+        page3->setObjectName("page3");
+        horizontalLayout_10 = new QHBoxLayout(page3);
+        horizontalLayout_10->setSpacing(0);
+        horizontalLayout_10->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_10->setObjectName("horizontalLayout_10");
+        horizontalLayout_10->setContentsMargins(0, 0, 0, 0);
+        HistoryList = new QListWidget(page3);
+        HistoryList->setObjectName("HistoryList");
+        HistoryList->setStyleSheet(QString::fromUtf8("QListWidget\n"
+"{\n"
+"	border:0px;\n"
+"    color:rgb(55,55,55);\n"
+"    padding-left:15px;	\n"
+"    padding-right:15px;	\n"
+"}\n"
+" \n"
+"/*\345\216\273\351\231\244\347\204\246\347\202\271\350\231\232\347\272\277*/\n"
+"*\n"
+"{\n"
+"	outline:0px;\n"
+"}\n"
+" \n"
+"QListWidget::Item\n"
+"{\n"
+"	height:50;\n"
+"    border:0px solid rgb(255,255,255);	\n"
+"	padding-top:1px;\n"
+"}\n"
+" \n"
+"QListWidget::Item:hover\n"
+"{\n"
+"	background-color: rgb(232, 232, 232);\n"
+"}\n"
+"\n"
+"/*\351\200\211\344\270\255*/\n"
+"QListWidget::Item:selected\n"
+"{\n"
+"	font: 75 16pt \"\351\230\277\351\207\214\345\246\210\345\246\210\346\225\260\351\273\221\344\275\223\";\n"
+"	color:rgb(55,55,55);\n"
+"	border:0px;\n"
+"	background:rgb(221,221,221);	\n"
+"}\n"
+""));
+
+        horizontalLayout_10->addWidget(HistoryList);
+
+        stackedWidget->addWidget(page3);
+
+        horizontalLayout_6->addWidget(stackedWidget);
 
         horizontalLayout_6->setStretch(0, 1);
         horizontalLayout_6->setStretch(1, 4);
@@ -376,17 +497,18 @@ public:
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName("horizontalLayout_2");
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        horizontalSpacer_8 = new QSpacerItem(340, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+        horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_8);
 
+        horizontalSpacer_10 = new QSpacerItem(120, 20, QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_10);
+
         load = new QPushButton(widget_5);
         load->setObjectName("load");
-        QSizePolicy sizePolicy4(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Expanding);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(load->sizePolicy().hasHeightForWidth());
-        load->setSizePolicy(sizePolicy4);
+        sizePolicy.setHeightForWidth(load->sizePolicy().hasHeightForWidth());
+        load->setSizePolicy(sizePolicy);
         load->setMinimumSize(QSize(32, 32));
         load->setMaximumSize(QSize(32, 32));
         QIcon icon4;
@@ -396,14 +518,14 @@ public:
 
         horizontalLayout_2->addWidget(load);
 
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Minimum);
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_3);
 
         previous = new QPushButton(widget_5);
         previous->setObjectName("previous");
-        sizePolicy4.setHeightForWidth(previous->sizePolicy().hasHeightForWidth());
-        previous->setSizePolicy(sizePolicy4);
+        sizePolicy.setHeightForWidth(previous->sizePolicy().hasHeightForWidth());
+        previous->setSizePolicy(sizePolicy);
         previous->setMinimumSize(QSize(32, 32));
         previous->setMaximumSize(QSize(32, 32));
         QIcon icon5;
@@ -415,8 +537,8 @@ public:
 
         play = new QPushButton(widget_5);
         play->setObjectName("play");
-        sizePolicy4.setHeightForWidth(play->sizePolicy().hasHeightForWidth());
-        play->setSizePolicy(sizePolicy4);
+        sizePolicy.setHeightForWidth(play->sizePolicy().hasHeightForWidth());
+        play->setSizePolicy(sizePolicy);
         play->setMinimumSize(QSize(32, 32));
         play->setMaximumSize(QSize(32, 32));
         QIcon icon6;
@@ -430,8 +552,8 @@ public:
 
         next = new QPushButton(widget_5);
         next->setObjectName("next");
-        sizePolicy4.setHeightForWidth(next->sizePolicy().hasHeightForWidth());
-        next->setSizePolicy(sizePolicy4);
+        sizePolicy.setHeightForWidth(next->sizePolicy().hasHeightForWidth());
+        next->setSizePolicy(sizePolicy);
         next->setMinimumSize(QSize(32, 32));
         next->setMaximumSize(QSize(32, 32));
         QIcon icon7;
@@ -441,14 +563,14 @@ public:
 
         horizontalLayout_2->addWidget(next, 0, Qt::AlignHCenter);
 
-        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Minimum);
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_4);
 
         voice = new QPushButton(widget_5);
         voice->setObjectName("voice");
-        sizePolicy4.setHeightForWidth(voice->sizePolicy().hasHeightForWidth());
-        voice->setSizePolicy(sizePolicy4);
+        sizePolicy.setHeightForWidth(voice->sizePolicy().hasHeightForWidth());
+        voice->setSizePolicy(sizePolicy);
         voice->setMinimumSize(QSize(32, 32));
         voice->setMaximumSize(QSize(32, 32));
         QIcon icon8;
@@ -462,11 +584,11 @@ public:
 
         volumeslider = new QSlider(widget_5);
         volumeslider->setObjectName("volumeslider");
-        QSizePolicy sizePolicy5(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Fixed);
-        sizePolicy5.setHorizontalStretch(0);
-        sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(volumeslider->sizePolicy().hasHeightForWidth());
-        volumeslider->setSizePolicy(sizePolicy5);
+        QSizePolicy sizePolicy4(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Fixed);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(volumeslider->sizePolicy().hasHeightForWidth());
+        volumeslider->setSizePolicy(sizePolicy4);
         volumeslider->setMinimumSize(QSize(0, 0));
         volumeslider->setMaximumSize(QSize(200, 16777215));
         volumeslider->setMaximum(100);
@@ -475,14 +597,14 @@ public:
 
         horizontalLayout_2->addWidget(volumeslider);
 
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_5);
 
         download = new QPushButton(widget_5);
         download->setObjectName("download");
-        sizePolicy4.setHeightForWidth(download->sizePolicy().hasHeightForWidth());
-        download->setSizePolicy(sizePolicy4);
+        sizePolicy.setHeightForWidth(download->sizePolicy().hasHeightForWidth());
+        download->setSizePolicy(sizePolicy);
         download->setMinimumSize(QSize(32, 32));
         download->setMaximumSize(QSize(32, 32));
         QIcon icon9;
@@ -549,10 +671,13 @@ public:
         verticalLayout_2->addWidget(widget);
 
 
-        gridLayout->addWidget(widget_3, 0, 0, 1, 1);
+        horizontalLayout_7->addWidget(widget_3);
 
 
         retranslateUi(musicplayer);
+
+        stackedWidget->setCurrentIndex(1);
+
 
         QMetaObject::connectSlotsByName(musicplayer);
     } // setupUi
@@ -565,15 +690,15 @@ public:
         pushButton->setText(QString());
         close->setText(QString());
 
-        const bool __sortingEnabled = listWidget_2->isSortingEnabled();
-        listWidget_2->setSortingEnabled(false);
-        QListWidgetItem *___qlistwidgetitem = listWidget_2->item(0);
+        const bool __sortingEnabled = option->isSortingEnabled();
+        option->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem = option->item(0);
         ___qlistwidgetitem->setText(QCoreApplication::translate("musicplayer", "\346\234\254\345\234\260\351\237\263\344\271\220", nullptr));
-        QListWidgetItem *___qlistwidgetitem1 = listWidget_2->item(1);
+        QListWidgetItem *___qlistwidgetitem1 = option->item(1);
         ___qlistwidgetitem1->setText(QCoreApplication::translate("musicplayer", "\347\275\221\347\273\234\351\237\263\344\271\220", nullptr));
-        QListWidgetItem *___qlistwidgetitem2 = listWidget_2->item(2);
+        QListWidgetItem *___qlistwidgetitem2 = option->item(2);
         ___qlistwidgetitem2->setText(QCoreApplication::translate("musicplayer", "\345\216\206\345\217\262\346\222\255\346\224\276", nullptr));
-        listWidget_2->setSortingEnabled(__sortingEnabled);
+        option->setSortingEnabled(__sortingEnabled);
 
         load->setText(QString());
         previous->setText(QString());
