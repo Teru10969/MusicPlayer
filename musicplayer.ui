@@ -26,8 +26,8 @@
    <string>musicplayer</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/QTMusicPlayer/logo.jpg</normaloff>:/QTMusicPlayer/logo.jpg</iconset>
+   <iconset resource="res.qrc">
+    <normaloff>:/res/logo3.jpg</normaloff>:/res/logo3.jpg</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">#widget_3{border-image: url(:/res/wallpaper1.png);}
@@ -168,8 +168,10 @@ QSlider::groove:Horizontal#horizontalSlider_music
          <item>
           <widget class="QLabel" name="label">
            <property name="styleSheet">
-            <string notr="true">font: 20pt &quot;Mistral&quot;;
-font-color:rgb(85, 85, 127);</string>
+            <string notr="true">QLabel {
+        font: 20pt &quot;Mistral&quot;;
+	    color: rgb(85, 85, 127);
+    }</string>
            </property>
            <property name="text">
             <string> TeruMusicPlayer</string>

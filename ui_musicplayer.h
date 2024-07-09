@@ -97,7 +97,7 @@ public:
         musicplayer->setSizePolicy(sizePolicy);
         musicplayer->setMinimumSize(QSize(960, 540));
         QIcon icon;
-        icon.addFile(QString::fromUtf8(":/QTMusicPlayer/logo.jpg"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon.addFile(QString::fromUtf8(":/res/logo3.jpg"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         musicplayer->setWindowIcon(icon);
         musicplayer->setStyleSheet(QString::fromUtf8("#widget_3{border-image: url(:/res/wallpaper1.png);}\n"
 "\n"
@@ -172,8 +172,10 @@ public:
 
         label = new QLabel(head);
         label->setObjectName("label");
-        label->setStyleSheet(QString::fromUtf8("font: 20pt \"Mistral\";\n"
-"font-color:rgb(85, 85, 127);"));
+        label->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"        font: 20pt \"Mistral\";\n"
+"	    color: rgb(85, 85, 127);\n"
+"    }"));
         label->setTextFormat(Qt::PlainText);
 
         horizontalLayout_4->addWidget(label);

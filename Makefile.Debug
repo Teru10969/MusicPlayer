@@ -158,7 +158,8 @@ compiler_moc_header_make_all: debug/moc_musicplayer.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) debug\moc_musicplayer.cpp
 debug/moc_musicplayer.cpp: musicplayer.h \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qaudiooutput.h \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QMediaPlayer \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qmediaplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qobject.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qnamespace.h \
@@ -258,16 +259,13 @@ debug/moc_musicplayer.cpp: musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qscopeguard.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qobject_impl.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qbindingstorage.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtmultimediaglobal.h \
 		../../Qt/6.7.2/mingw_64/include/QtGui/qtguiglobal.h \
 		../../Qt/6.7.2/mingw_64/include/QtGui/qtgui-config.h \
 		../../Qt/6.7.2/mingw_64/include/QtGui/qtguiexports.h \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtaudio.h \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qaudio.h \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qmediaplayer.h \
-		../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qmediaenumdebug.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qmetaobject.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qvariant.h \
@@ -283,6 +281,10 @@ debug/moc_musicplayer.cpp: musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qhash.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qvarlengtharray.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/q23utility.h \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtaudio.h \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qaudio.h \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QAudioOutput \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qaudiooutput.h \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QWidget \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qwidget.h \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -380,6 +382,32 @@ debug/moc_musicplayer.cpp: musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtSql/qtsqlexports.h \
 		../../Qt/6.7.2/mingw_64/include/QtSql/qsqldatabase.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/QString \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/QNetworkRequest \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qnetworkrequest.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetworkglobal.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetwork-config.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QSharedDataPointer \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/QNetworkAccessManager \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qnetworkaccessmanager.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/QSslConfiguration \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslconfiguration.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslsocket.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qtcpsocket.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qabstractsocket.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qhostaddress.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslerror.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslcertificate.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qcryptographichash.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qdatetime.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qcalendar.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qssl.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QFlags \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/QSslPreSharedKeyAuthenticator \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslpresharedkeyauthenticator.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QMetaType \
 		debug/moc_predefs.h \
 		../../Qt/6.7.2/mingw_64/bin/moc.exe
 	E:\Qt\6.7.2\mingw_64\bin\moc.exe $(DEFINES) --include E:/qtproject/musicplayer_demo/debug/moc_predefs.h -IE:/Qt/6.7.2/mingw_64/mkspecs/win32-g++ -IE:/qtproject/musicplayer_demo -IE:/Qt/6.7.2/mingw_64/include -IE:/Qt/6.7.2/mingw_64/include/QtMultimedia -IE:/Qt/6.7.2/mingw_64/include/QtWidgets -IE:/Qt/6.7.2/mingw_64/include/QtGui -IE:/Qt/6.7.2/mingw_64/include/QtNetwork -IE:/Qt/6.7.2/mingw_64/include/QtSql -IE:/Qt/6.7.2/mingw_64/include/QtCore -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IE:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include musicplayer.h -o debug\moc_musicplayer.cpp
@@ -408,7 +436,8 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 ####### Compile
 
 debug/main.o: main.cpp musicplayer.h \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qaudiooutput.h \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QMediaPlayer \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qmediaplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qobject.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qnamespace.h \
@@ -508,16 +537,13 @@ debug/main.o: main.cpp musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qscopeguard.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qobject_impl.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qbindingstorage.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtmultimediaglobal.h \
 		../../Qt/6.7.2/mingw_64/include/QtGui/qtguiglobal.h \
 		../../Qt/6.7.2/mingw_64/include/QtGui/qtgui-config.h \
 		../../Qt/6.7.2/mingw_64/include/QtGui/qtguiexports.h \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtaudio.h \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qaudio.h \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qmediaplayer.h \
-		../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qmediaenumdebug.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qmetaobject.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qvariant.h \
@@ -533,6 +559,10 @@ debug/main.o: main.cpp musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qhash.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qvarlengtharray.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/q23utility.h \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtaudio.h \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qaudio.h \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QAudioOutput \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qaudiooutput.h \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QWidget \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qwidget.h \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -630,6 +660,32 @@ debug/main.o: main.cpp musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtSql/qtsqlexports.h \
 		../../Qt/6.7.2/mingw_64/include/QtSql/qsqldatabase.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/QString \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/QNetworkRequest \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qnetworkrequest.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetworkglobal.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetwork-config.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QSharedDataPointer \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/QNetworkAccessManager \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qnetworkaccessmanager.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/QSslConfiguration \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslconfiguration.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslsocket.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qtcpsocket.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qabstractsocket.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qhostaddress.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslerror.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslcertificate.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qcryptographichash.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qdatetime.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qcalendar.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qssl.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QFlags \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/QSslPreSharedKeyAuthenticator \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslpresharedkeyauthenticator.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QMetaType \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
 		../../Qt/6.7.2/mingw_64/include/QtSql/QSql \
@@ -641,7 +697,8 @@ debug/main.o: main.cpp musicplayer.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o main.cpp
 
 debug/musicplayer.o: musicplayer.cpp musicplayer.h \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qaudiooutput.h \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QMediaPlayer \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qmediaplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qobject.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qnamespace.h \
@@ -741,16 +798,13 @@ debug/musicplayer.o: musicplayer.cpp musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qscopeguard.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qobject_impl.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qbindingstorage.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtmultimediaglobal.h \
 		../../Qt/6.7.2/mingw_64/include/QtGui/qtguiglobal.h \
 		../../Qt/6.7.2/mingw_64/include/QtGui/qtgui-config.h \
 		../../Qt/6.7.2/mingw_64/include/QtGui/qtguiexports.h \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtaudio.h \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qaudio.h \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qmediaplayer.h \
-		../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
 		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qmediaenumdebug.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qmetaobject.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qvariant.h \
@@ -766,6 +820,10 @@ debug/musicplayer.o: musicplayer.cpp musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qhash.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qvarlengtharray.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/q23utility.h \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtaudio.h \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qaudio.h \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QAudioOutput \
+		../../Qt/6.7.2/mingw_64/include/QtMultimedia/qaudiooutput.h \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QWidget \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qwidget.h \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -863,8 +921,33 @@ debug/musicplayer.o: musicplayer.cpp musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtSql/qtsqlexports.h \
 		../../Qt/6.7.2/mingw_64/include/QtSql/qsqldatabase.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/QString \
-		ui_musicplayer.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/QNetworkRequest \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qnetworkrequest.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetworkglobal.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetwork-config.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QSharedDataPointer \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
 		../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/QNetworkAccessManager \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qnetworkaccessmanager.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/QSslConfiguration \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslconfiguration.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslsocket.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qtcpsocket.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qabstractsocket.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qhostaddress.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslerror.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslcertificate.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qcryptographichash.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qdatetime.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qcalendar.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qssl.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QFlags \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/QSslPreSharedKeyAuthenticator \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslpresharedkeyauthenticator.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QMetaType \
+		ui_musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtGui/QIcon \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
@@ -903,19 +986,27 @@ debug/musicplayer.o: musicplayer.cpp musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtSql/qsqldriver.h \
 		../../Qt/6.7.2/mingw_64/include/QtSql/QSqlError \
 		../../Qt/6.7.2/mingw_64/include/QtSql/qsqlerror.h \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QMediaPlayer \
-		../../Qt/6.7.2/mingw_64/include/QtMultimedia/QAudioOutput \
 		../../Qt/6.7.2/mingw_64/include/QtCore/QDir \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qdir.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qfile.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qfiledevice.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qfileinfo.h \
-		../../Qt/6.7.2/mingw_64/include/QtCore/qdatetime.h \
-		../../Qt/6.7.2/mingw_64/include/QtCore/qcalendar.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qtimezone.h \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QFileDialog \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qfiledialog.h \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/QNetworkReply \
+		../../Qt/6.7.2/mingw_64/include/QtNetwork/qnetworkreply.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QIODevice \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QEventLoop \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QJsonArray \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qjsonarray.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qjsonvalue.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qcborvalue.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qcborcommon.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/quuid.h \
+		../../Qt/6.7.2/mingw_64/include/QtCore/QJsonObject \
+		../../Qt/6.7.2/mingw_64/include/QtCore/qjsonobject.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/QDebug \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QListWidgetItem \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QTableWidgetItem \

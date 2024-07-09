@@ -4,6 +4,7 @@
 #include <QMouseEvent>
 #include <QPoint>
 
+/*数据库相关*/
 #include <QSql>
 #include <QSqlDatabase>
 #include <QSqlDriver>
@@ -11,11 +12,22 @@
 #include <QSqlError>
 #include <QObject>
 
+/*播放音乐相关*/
 #include <QMediaPlayer>
 #include <QAudioOutput>
 
+/*本地文件相关*/
 #include <QDir>
 #include <QFileDialog>
+
+/*网络相关*/
+#include <QNetworkRequest>          //HTTP的URL管理类
+#include <QNetworkAccessManager>    //URL的上传管理
+#include <QNetworkReply>            //网页回复数据触发信号的类
+#include <QEventLoop>               //提供一种进入和离开事件循环的方法
+#include <QJsonArray>               //封装JSON数组
+#include <QJsonObject>              //封装JSON对象
+#include <QJsonDocument>
 
 #include <QDebug>
 
@@ -147,7 +159,7 @@ void musicplayer::on_load_clicked()//导入本地音乐文件
     // ui->LocalMusiclist->setCurrentRow(0);
 }
 
-void musicplayer::updateCurrentPlayingItem()
+void musicplayer::updateCurrentPlayingItem()//将当前播放音乐变成红色
 {  
     for (int i = 0; i < ui->LocalMusiclist->count(); i++) {
         if (i == index) {
@@ -295,7 +307,7 @@ void musicplayer::on_option_currentRowChanged(int currentRow)
 }
 
 void musicplayer::connectDatabase(){
-    QSqlDatabase db=QSqlDatabase::addDatabase("QSQLITE");
+    db=QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("MusicPlayer.db");
     if(!db.open()){
         qDebug() << "Error: connection with database fail";
@@ -356,3 +368,249 @@ void musicplayer::displayPlayHistory() { //显示历史播放记录
     ui->HistoryList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//填充列宽
     ui->HistoryList->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);// 根据内容设置所有行高
 }
+
+void musicplayer::on_search_clicked()
+{
+    ui->NetMusicList->clear();// 清空网络音乐列表
+    QSqlQuery query;
+    QString sql="delete from songlist;";
+    if(!query.exec(sql))qDebug()<<"错误"<<query.lastError().text();
+    QDateTime time = QDateTime::currentDateTime();
+    // 将当前时间转换为自纪元以来的秒数，并将其转换为字符串
+    QString currentTimeString = QString::number(time.toSecsSinceEpoch()*1000);
+    QString signaturecode = getSearch_Md5(ui->searchline->text(),currentTimeString);
+    // 根据用户输入的 MP3 名称发起操作请求
+    QString url = kugouSearchApi + QString("callback=callback123"
+                                           "&srcappid=2919"
+                                           "&clientver=1000"
+                                           "&clienttime=%1"
+                                           "&mid=707708a817d80eedd95f2ae68bc57780"
+                                           "&uuid=707708a817d80eedd95f2ae68bc57780"
+                                           "&dfid=11SITU3au0iw0OdGgJ0EhTvI"
+                                           "&keyword=%2"
+                                           "&page=1"
+                                           "&pagesize=30"
+                                           "&bitrate=0"
+                                           "&isfuzzy=0"
+                                           "&inputtype=0"
+                                           "&platform=WebFilter"
+                                           "&userid=0"
+                                           "&iscorrection=1"
+                                           "&privilege_filter=0"
+                                           "&filter=10"
+                                           "&token="
+                                           "&appid=1014"
+                                           "&signature=%3"
+                                           ).arg(currentTimeString).arg(ui->searchline->text()).arg(signaturecode);
+
+    // 发起 HTTP 请求
+    httpAccess(url);
+    QByteArray JsonData;
+    QEventLoop loop;
+
+    // 等待 HTTP 请求完成并获取数据
+    auto c = connect(this, &musicplayer::finish, [&](const QByteArray &data){
+        JsonData = data;
+        loop.exit(1);
+    });
+    loop.exec();
+    disconnect(c);
+
+    // 解析获取的 JSON 数据
+    hashJsonAnalysis(JsonData);
+    ui->option->setCurrentRow(1);
+}
+
+void musicplayer::httpAccess(QString url)
+{
+    //实例化网络请求操作事项
+    request = new QNetworkRequest;
+    //将url网页地址存入request请求中
+    request->setUrl(url);
+    //实例化网络管理（访问）
+    manager = new QNetworkAccessManager;
+    //通过get,上传具体的请求
+    manager->get(*request);
+    //当网页回复消息，出发finish信号，读取数据
+    connect(manager,&QNetworkAccessManager::finished,this,&musicplayer::netReply);
+}
+
+void musicplayer::netReply(QNetworkReply *reply)
+{
+    // 获取响应状态码，200 属于正常
+    QVariant status_code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+    qDebug() << status_code;
+    // 重定向目标属性
+    reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+    if (reply->error() == QNetworkReply::NoError)
+    {
+        // 如果没有发生网络错误，则读取响应数据
+        QByteArray data = reply->readAll();
+        // 发射自定义的 finish 信号，将响应数据传递给槽函数
+        emit finish(data);
+    }
+    else
+    {
+        // 如果发生了网络错误，则打印错误信息
+        qDebug() << reply->errorString();
+    }
+}
+
+void musicplayer::hashJsonAnalysis(QByteArray JsonData)
+{
+    //qDebug()<< JsonData; // 打印输入的 JSON 数据，用于调试
+    //移除callback123()
+    // 找到第一个左括号 "(" 的位置
+    int leftBracketIndex = JsonData.indexOf('(');
+    if (leftBracketIndex != -1)
+    {
+        // 找到最后一个右括号 ")" 的位置
+        int rightBracketIndex = JsonData.lastIndexOf(')');
+        if (rightBracketIndex != -1)
+        {
+            // 提取 JSON 数据，去除包裹的部分
+            JsonData = JsonData.mid(leftBracketIndex + 1, rightBracketIndex - leftBracketIndex - 1);
+        }
+    }
+    //保存json查看数据
+    QFile file("hash.json");
+    if(file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        file.write(JsonData);
+        file.close();
+    }
+
+
+    // 将 JSON 数据解析为 QJsonDocument 对象
+    QJsonDocument document = QJsonDocument::fromJson(JsonData);
+
+    if(document.isObject()) // 如果解析后的对象是一个 JSON 对象
+    {
+        qDebug()<<"boject";
+        QJsonObject data = document.object(); // 获取 JSON 对象中的"data"字段
+        if(data.contains("data")) // 如果"data"字段存在
+        {
+            QJsonObject objectInfo = data.value("data").toObject(); // 获取"data"字段中的对象
+            qDebug()<<"data";
+            if(objectInfo.contains("lists")) // 如果"lists"字段存在
+            {
+                QJsonArray objectHash = objectInfo.value("lists").toArray(); // 获取"lists"字段中的数组
+                qDebug()<<"lists";
+                for(int i = 0; i < objectHash.count(); i++) // 遍历数组中的每个元素
+                {
+                    QString singer_song_name,EMixSongID;
+                    QJsonObject album = objectHash.at(i).toObject(); // 获取数组元素中的对象
+
+                    // 从对象中获取歌曲名、歌手名、专辑 ID 和哈希值
+                    if(album.contains("FileName"))
+                    {
+                        singer_song_name = album.value("FileName").toString();
+                    }
+                    if(album.contains("EMixSongID"))
+                    {
+                        EMixSongID = album.value("EMixSongID").toString();
+                    }
+                    // 将解析出的信息插入数据库
+                    QSqlQuery query;
+                    query.prepare("INSERT INTO songlist (id, FileName, EMixSongID) VALUES (:id, :song_name, :song_id)");
+                    query.bindValue(":id", i);
+                    query.bindValue(":song_name", singer_song_name);
+                    query.bindValue(":song_id", EMixSongID);
+                    if(!query.exec()) // 如果插入数据库失败
+                    {
+                        qDebug()<<"插入数据库错误"<<query.lastError().text();
+                    }
+
+                    // 在搜索展示框中显示歌曲名称和歌手名称
+                    QListWidgetItem *item = new QListWidgetItem(singer_song_name);
+                    ui->NetMusicList->addItem(item);
+                }
+            }
+        }
+    }
+    // if(document.isArray())
+    // {
+    //     qDebug() <<"Array";
+    // }
+}
+
+QString musicJsonAnalysis(QByteArray JsonData)
+{
+    // 保存 JSON 数据到文件中以便查看
+    QFile file("download.json");
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        file.write(JsonData);
+        file.close();
+    }
+    // 解析 JSON 数据
+    QJsonDocument document = QJsonDocument::fromJson(JsonData);
+    if (document.isObject())
+    {
+        QJsonObject data = document.object();
+        if (data.contains("data"))
+        {
+            QJsonObject objectPlayurl = data.value("data").toObject();
+            // 如果包含歌词，发送歌词显示信号
+            // if (objectPlayurl.contains("lyrics"))
+            // {
+            //     emit lyricShow(objectPlayurl.value("lyrics").toString());
+            // }
+            // 返回音乐播放 URL
+            if (objectPlayurl.contains("play_url"))
+            {
+                return objectPlayurl.value("play_url").toString();
+                qDebug()<<objectPlayurl.value("play_url").toString();
+            }
+        }
+    }
+}
+
+
+
+
+
+QString musicplayer::getDownload_Md5(QString time,QString encode_album_audio_id)
+{
+
+}
+QString musicplayer::getSearch_Md5(QString songname,QString time)
+{
+    // 构建签名列表
+            QStringList signature_list;
+    signature_list <<   "NVPh5oo715z5DIWAeQlhMDsWXXQV4hwt"
+                   <<   "appid=1014"
+                   <<   "bitrate=0"
+                   <<   "callback=callback123"
+                   <<   "clienttime=" + time
+                   <<   "clientver=1000"
+                   <<   "dfid=11SITU3au0iw0OdGgJ0EhTvI"
+                   <<   "filter=10"
+                   <<   "inputtype=0"
+                   <<   "iscorrection=1"
+                   <<   "isfuzzy=0"
+                   <<   "keyword=" + songname
+                   <<   "mid=707708a817d80eedd95f2ae68bc57780"
+                   <<   "page=1"
+                   <<   "pagesize=30"
+                   <<   "platform=WebFilter"
+                   <<   "privilege_filter=0"
+                   <<   "srcappid=2919"
+                   <<   "token="
+                   <<   "userid=0"
+                   <<   "uuid=707708a817d80eedd95f2ae68bc57780"
+                   <<   "NVPh5oo715z5DIWAeQlhMDsWXXQV4hwt";
+
+    // 将签名列表中的元素连接成一个字符串
+    QString string = signature_list.join("");
+    //qDebug()<< string;
+    //生成 MD5 哈希
+    QByteArray hashedData = QCryptographicHash::hash(string.toUtf8(), QCryptographicHash::Md5);
+    // 将哈希数据转换为十六进制字符串
+    QString md5Hash = hashedData.toHex();
+    return md5Hash;
+}
+// void musicplayer::downloadPlayer(QString encode_album_audio_id)
+// {
+
+// }
