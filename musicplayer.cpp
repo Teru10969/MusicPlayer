@@ -9,8 +9,8 @@
 #include <QSqlDatabase>
 #include <QSqlDriver>
 #include <QSqlQuery>
+#include <QSqlRecord>
 #include <QSqlError>
-#include <QObject>
 
 /*播放音乐相关*/
 #include <QMediaPlayer>
@@ -46,13 +46,18 @@ musicplayer::musicplayer(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
+
     output=new QAudioOutput(this);
     player=new QMediaPlayer(this);
     player->setAudioOutput(output);
+
     musicplayer::connectDatabase();
+
+    //界面窗口初始设置为本地音乐窗口
     ui->stackedWidget->setCurrentIndex(0);
-    currentwidget=ui->stackedWidget->currentWidget();
+    currentwidget=ui->stackedWidget->widget(0);
     currentList=currentwidget->findChild<QListWidget *>();
+
     connect(player,&QMediaPlayer::durationChanged,this,[=](qint64 duration){//音乐总时长
         ui->time2->setText(QString("%1:%2")
         .arg(duration/1000/60,2,10,QChar('0'))
@@ -85,35 +90,13 @@ musicplayer::musicplayer(QWidget *parent) :
         }
     });
     musicplayer::displayPlayHistory();
-     // ui->listWidget->item(0)->setForeground(Qt::red);
-     // ui->listWidget_2->item(0)->setForeground(Qt::red);
-     // qDebug()<<ui->listWidget->item(0)->text();
-    // connect(ui->volumeslider,&QSlider::sliderMoved,output,&QAudioOutput::setVolume);
-    // connect(output,&QAudioOutput::setVolume,ui->volumeslider,&QSlider::setSliderPosition);
-   // connect(ui->timeslider,&QSlider::sliderReleased, this,&on_timeslider_sliderReleased);
-    // connect(ui->timeslider,&QSlider::sliderMoved,player,&QMediaPlayer::setPosition);
-    // connect(ui->timeslider,&QSlider::sliderPressed,player,&QMediaPlayer::setPosition(ui->timeslider->value));
+    // qDebug()<<"currentwidget:"<<ui->stackedWidget->currentIndex();
 }
 
 musicplayer::~musicplayer()
 {
     delete ui;
 }
-// void musicplayer::mouseMoveEvent(QMouseEvent* event){
-//     QWidget::mouseMoveEvent(event);
-//     QPoint y=event->globalPos();
-//     QPoint x=y-this->z;
-//     this->move(x);
-// }
-// void musicplayer::mousePressEvent(QMouseEvent* event){
-//     QWidget::mousePressEvent(event);
-//     QPoint x=this->geometry().topLeft();
-//     this->z=y-x;
-// }
-// void musicplayer::mouseReleaseEvent(QMouseEvent* event){
-//     QWidget::mouseReleaseEvent(event);
-//     this->z=QPoint();
-// }
 
 void musicplayer::on_load_clicked()//导入本地音乐文件
 {
@@ -160,23 +143,21 @@ void musicplayer::on_load_clicked()//导入本地音乐文件
 }
 
 void musicplayer::updateCurrentPlayingItem()//将当前播放音乐变成红色
-{  
+{
+
     for (int i = 0; i < ui->LocalMusiclist->count(); i++) {
         if (i == index) {
             ui->LocalMusiclist->item(i)->setForeground(Qt::red);
         }else{
             ui->LocalMusiclist->item(i)->setForeground(Qt::black);
         }
-        // qDebug()<<i;
-        // qDebug()<<ui->LocalMusiclist->item(i);
-        // qDebug()<<ui->LocalMusiclist->item(i)->foreground();
     }
 }
 
 void musicplayer::on_play_clicked()//播放暂停音乐
 {
     //检查列表中是否有音乐可播放
-    if (currentList->count()==0) {
+    if ((currentList->count()==0&&player->playbackState()==QMediaPlayer::PlaybackState::StoppedState)) {
         QMessageBox::information(this, "提示", "播放列表为空");
         ui->play->setChecked(false);
         return;
@@ -225,7 +206,6 @@ void musicplayer::on_previous_clicked()//上一曲
     player->setSource(playList[index]); // 设置媒体源为选中的 URL
     updateCurrentPlayingItem();
     player->play(); // 播放选中的音乐
-    // ui->play->setChecked(true);
 }
 
 
@@ -240,7 +220,6 @@ void musicplayer::on_next_clicked()//下一曲
     player->setSource(playList[index]); // 设置媒体源为选中的 URL
     updateCurrentPlayingItem();
     player->play(); // 播放选中的音乐
-    // ui->play->setChecked(true);
 }
 
 
@@ -281,7 +260,6 @@ void musicplayer::on_volumeslider_sliderPressed()
 {
     float position=ui->volumeslider->value();
     float volume=position/100;
-    // qDebug()<<volume;
     output->setVolume(volume);
 }
 
@@ -290,16 +268,6 @@ void musicplayer::on_voice_clicked()
     //按下声音键切换静音状态和音量状态
     output->setMuted(!output->isMuted());
 }
-
-
-
-// void musicplayer::on_LocalMusicList_itemClicked(QListWidgetItem *item)
-// {
-//     ui->LocalMusiclist->setCurrentItem(item);
-// }
-
-
-
 
 void musicplayer::on_option_currentRowChanged(int currentRow)
 {
@@ -342,9 +310,31 @@ void musicplayer::upsertPlayHistory(const QString &songName){ //更新播放记�
 
 void musicplayer::on_MediaSourceChanged(const QUrl &mediaSource) { //媒体源切换槽函数
     // 从媒体源URL中提取歌曲名称（假设歌曲名称是文件名的一部分）
-    QString songName = mediaSource.fileName();
-    musicplayer::upsertPlayHistory(songName);
+    if(mediaSource.isLocalFile()){
+        QString songName = mediaSource.fileName();
+        musicplayer::upsertPlayHistory(songName);
+    }else{
+        int id=currentList->currentRow();
+        index=id;
+        QSqlQuery query;
+        query.prepare("SELECT FileName FROM songlist WHERE id = :id");
+        query.bindValue(":id", id);
+        if (!query.exec()) {
+            qDebug() << "Query execution error:";
+            qDebug() << query.lastError().text();
+        } else {
+            if (query.next()) {
+                // 获取查询结果，并赋值给songname
+                QString netsongName = query.value(0).toString();
+                musicplayer::upsertPlayHistory(netsongName);
+                qDebug() << "FileName for id" << id << ":" << netsongName;
+            } else {
+                qDebug() << "No records found for id" << id;
+            }
+        }
+    }
     displayPlayHistory();//更新历史记录界面
+    qDebug()<<index;
 }
 
 void musicplayer::displayPlayHistory() { //显示历史播放记录
@@ -528,13 +518,9 @@ void musicplayer::hashJsonAnalysis(QByteArray JsonData)
             }
         }
     }
-    // if(document.isArray())
-    // {
-    //     qDebug() <<"Array";
-    // }
 }
 
-QString musicJsonAnalysis(QByteArray JsonData)
+QString musicplayer::musicJsonAnalysis(QByteArray JsonData)
 {
     // 保存 JSON 数据到文件中以便查看
     QFile file("download.json");
@@ -543,6 +529,7 @@ QString musicJsonAnalysis(QByteArray JsonData)
         file.write(JsonData);
         file.close();
     }
+
     // 解析 JSON 数据
     QJsonDocument document = QJsonDocument::fromJson(JsonData);
     if (document.isObject())
@@ -551,7 +538,7 @@ QString musicJsonAnalysis(QByteArray JsonData)
         if (data.contains("data"))
         {
             QJsonObject objectPlayurl = data.value("data").toObject();
-            // 如果包含歌词，发送歌词显示信号
+            // // 如果包含歌词，发送歌词显示信号
             // if (objectPlayurl.contains("lyrics"))
             // {
             //     emit lyricShow(objectPlayurl.value("lyrics").toString());
@@ -566,13 +553,34 @@ QString musicJsonAnalysis(QByteArray JsonData)
     }
 }
 
-
-
-
-
 QString musicplayer::getDownload_Md5(QString time,QString encode_album_audio_id)
 {
+    // 构建签名列表
+    QStringList signature_list;
+    signature_list << "NVPh5oo715z5DIWAeQlhMDsWXXQV4hwt"
+                   << "appid=1014"
+                   << "clienttime=" + time
+                   << "clientver=20000"
+                   << "dfid=11SITU3au0iw0OdGgJ0EhTvI"
+                   << "encode_album_audio_id=" + encode_album_audio_id
+                   << "mid=707708a817d80eedd95f2ae68bc57780"
+                   << "platid=4"
+                   << "srcappid=2919"
+                   << "token="
+                   << "userid=0"
+                   << "uuid=707708a817d80eedd95f2ae68bc57780"
+                   << "NVPh5oo715z5DIWAeQlhMDsWXXQV4hwt";
 
+    // 将签名列表中的元素连接成一个字符串
+    QString string = signature_list.join("");
+    //qDebug()<< string;
+    //生成 MD5 哈希
+    QByteArray hashedData = QCryptographicHash::hash(string.toUtf8(), QCryptographicHash::Md5);
+
+    // 将哈希数据转换为十六进制字符串
+    QString md5Hash = hashedData.toHex();
+
+    return md5Hash;
 }
 QString musicplayer::getSearch_Md5(QString songname,QString time)
 {
@@ -610,7 +618,105 @@ QString musicplayer::getSearch_Md5(QString songname,QString time)
     QString md5Hash = hashedData.toHex();
     return md5Hash;
 }
-// void musicplayer::downloadPlayer(QString encode_album_audio_id)
-// {
 
-// }
+QString musicplayer::loadPlayer(QString encode_album_audio_id)
+{
+    //构建歌曲的 URL
+    QDateTime time = QDateTime::currentDateTime();
+    // 将当前时间转换为自纪元以来的秒数，并将其转换为字符串
+    QString currentTimeString = QString::number(time.toSecsSinceEpoch()*1000);
+    // currentTimeString = "1713782920612";
+    // QString encode_album_audio_id = "j5yn384";
+    QString signaturecode = getDownload_Md5(currentTimeString,encode_album_audio_id);
+    QString url = kugouDownldadApi + QString("srcappid=2919"
+                                             "&clientver=20000"
+                                             "&clienttime=%1"
+                                             "&mid=707708a817d80eedd95f2ae68bc57780"
+                                             "&uuid=707708a817d80eedd95f2ae68bc57780"
+                                             "&dfid=11SITU3au0iw0OdGgJ0EhTvI"
+                                             "&appid=1014"
+                                             "&platid=4"
+                                             "&encode_album_audio_id=%2"
+                                             "&token="
+                                             "&userid=0"
+                                             "&signature=%3"
+                                             ).arg(currentTimeString).arg(encode_album_audio_id).arg(signaturecode);
+    qDebug()<<url;
+    // 发起 HTTP 请求获取歌曲数据
+    httpAccess(url);
+
+    QByteArray JsonData;
+    QEventLoop loop;
+
+    // 等待 HTTP 请求完成并获取数据
+    auto d = connect(this,&musicplayer::finish, [&](const QByteArray &data){
+        JsonData = data;
+        loop.exit(1);
+    });
+    loop.exec();
+    disconnect(d);
+
+    // 解析要播放的音乐URL
+    QString music = musicplayer::musicJsonAnalysis(JsonData);
+    return music;
+}
+
+void musicplayer::on_NetMusicList_itemDoubleClicked(QListWidgetItem *item) //双击列表项播放网络音乐
+{
+    // 获取双击的歌曲索引，即数据表的 ID 号
+    index=ui->NetMusicList->currentRow();
+    QSqlQuery query;
+    QString sql = QString("select * from songlist where id = %1;").arg(index);
+    if (!query.exec(sql))
+    {
+        QMessageBox::critical(nullptr, "select * from songlist where id =", db.lastError().text());
+    }
+    // 将选中的音乐的数据信息存入历史数据表
+    QString  singer_song_name,EMixSongID;
+    while (query.next())
+    {
+        QSqlRecord record = query.record();
+        int singer_song_namekey = record.indexOf("FileName");
+        int EMixSongIDkey = record.indexOf("EMixSongID");
+
+        singer_song_name = query.value(singer_song_namekey).toString();
+        EMixSongID = query.value(EMixSongIDkey).toString();
+
+        // 查询历史数据表中是否已经存在该歌曲的记录
+        sql = QString("select EMixSongID from netsonghistory where EMixSongID = '%1';").arg(EMixSongID);
+        if (!query.exec(sql))
+        {
+            QMessageBox::critical(nullptr, "select hash from netsonghistory where EMixSongID =", db.lastError().text());
+        }
+        // 如果不存在该记录，则将其存入历史数据表
+        if (query.next() == NULL)
+        {
+            sql = QString("insert into netsonghistory values(NULL, '%1', '%2')").arg(singer_song_name).arg(EMixSongID);
+            if (!query.exec(sql))
+            {
+                QMessageBox::critical(nullptr, "insert error", db.lastError().text());
+            }
+            // 将歌手和歌名放入历史歌曲表中显示
+            // QListWidgetItem *item = new QListWidgetItem(singer_song_name);
+            // ui->lw_record->addItem(item);
+        }
+    }
+    // 播放选中的音乐
+    QString music=musicplayer::loadPlayer(EMixSongID);
+    player->setSource(QUrl(music));
+    player->play();
+}
+
+
+void musicplayer::on_stackedWidget_currentChanged(int arg1) //界面切换
+{
+    currentwidget=ui->stackedWidget->widget(arg1);
+    currentList=currentwidget->findChild<QListWidget *>();
+    qDebug()<<ui->stackedWidget->currentIndex();
+}
+
+void musicplayer::getNetList()
+{
+    QSqlQuery query;
+    QString sql="delete from neturl;";
+}

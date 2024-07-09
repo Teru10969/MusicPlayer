@@ -34,6 +34,7 @@ public:
     QString musicJsonAnalysis(QByteArray JsonData);
     QString getDownload_Md5(QString time,QString encode_album_audio_id);
     QString getSearch_Md5(QString songname,QString time);
+    void getNetList();
     // virtual void mouseMoveEvent(QMouseEvent* event);
     // virtual void mousePressEvent(QMouseEvent* event);
     // virtual void mouseReleaseEvent(QMouseEvent* event);
@@ -75,7 +76,11 @@ private slots:
 
     void netReply(QNetworkReply *reply);
 
-    // void downloadPlayer(QString encode_album_audio_id);
+    QString loadPlayer(QString encode_album_audio_id);
+
+    void on_NetMusicList_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_stackedWidget_currentChanged(int arg1);
 
 private:
     Ui::musicplayer *ui;

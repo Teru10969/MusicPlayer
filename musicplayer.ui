@@ -506,7 +506,7 @@ QListWidget::Item:selected
          <item>
           <widget class="QStackedWidget" name="stackedWidget">
            <property name="currentIndex">
-            <number>2</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page1">
             <layout class="QHBoxLayout" name="horizontalLayout_8">
