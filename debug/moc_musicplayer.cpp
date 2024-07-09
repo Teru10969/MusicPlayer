@@ -61,7 +61,7 @@ constexpr auto qt_meta_stringdata_CLASSmusicplayerENDCLASS = QtMocHelpers::strin
     "netReply",
     "QNetworkReply*",
     "reply",
-    "loadPlayer",
+    "UrlAnalysis",
     "encode_album_audio_id",
     "on_NetMusicList_itemDoubleClicked",
     "on_stackedWidget_currentChanged",
@@ -177,7 +177,7 @@ Q_CONSTINIT const QMetaObject musicplayer::staticMetaObject = { {
         // method 'netReply'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QNetworkReply *, std::false_type>,
-        // method 'loadPlayer'
+        // method 'UrlAnalysis'
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         // method 'on_NetMusicList_itemDoubleClicked'
@@ -211,7 +211,7 @@ void musicplayer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 12: _t->on_MediaSourceChanged((*reinterpret_cast< std::add_pointer_t<QUrl>>(_a[1]))); break;
         case 13: _t->on_search_clicked(); break;
         case 14: _t->netReply((*reinterpret_cast< std::add_pointer_t<QNetworkReply*>>(_a[1]))); break;
-        case 15: { QString _r = _t->loadPlayer((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
+        case 15: { QString _r = _t->UrlAnalysis((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
         case 16: _t->on_NetMusicList_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
         case 17: _t->on_stackedWidget_currentChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;

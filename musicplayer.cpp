@@ -90,6 +90,7 @@ musicplayer::musicplayer(QWidget *parent) :
         }
     });
     musicplayer::displayPlayHistory();
+    qDebug() << "Debug message";
     // qDebug()<<"currentwidget:"<<ui->stackedWidget->currentIndex();
 }
 
@@ -137,7 +138,7 @@ void musicplayer::on_load_clicked()//导入本地音乐文件
         return;
     }
 
-    player->setSource(playList[index]);
+    // player->setSource(playList[index]);
     ui->option->setCurrentRow(0);
     // ui->LocalMusiclist->setCurrentRow(0);
 }
@@ -145,17 +146,22 @@ void musicplayer::on_load_clicked()//导入本地音乐文件
 void musicplayer::updateCurrentPlayingItem()//将当前播放音乐变成红色
 {
 
-    for (int i = 0; i < ui->LocalMusiclist->count(); i++) {
+    for (int i = 0; i < currentList->count(); i++) {
         if (i == index) {
-            ui->LocalMusiclist->item(i)->setForeground(Qt::red);
+            currentList->item(i)->setForeground(Qt::red);
         }else{
-            ui->LocalMusiclist->item(i)->setForeground(Qt::black);
+            currentList->item(i)->setForeground(Qt::black);
         }
     }
 }
 
 void musicplayer::on_play_clicked()//播放暂停音乐
 {
+    if(ui->stackedWidget->currentIndex()==2)
+    {
+        ui->play->setChecked(false);
+        return;
+    }
     //检查列表中是否有音乐可播放
     if ((currentList->count()==0&&player->playbackState()==QMediaPlayer::PlaybackState::StoppedState)) {
         QMessageBox::information(this, "提示", "播放列表为空");
@@ -167,10 +173,20 @@ void musicplayer::on_play_clicked()//播放暂停音乐
     case QMediaPlayer::PlaybackState::StoppedState://停止状态 播放当前选中音乐
     {
         // ui->play->setChecked(true);
-        if(currentList->currentRow()==-1); //如果未选择歌曲，不处理，默认播放第一个
-        else index=currentList->currentRow(); //播放选择的音乐
-        player->setSource(playList[index]);
-        player->play();
+        if(currentList->currentRow()==-1)//如果未选择歌曲，不处理，默认播放第一个
+        {
+            currentList->setCurrentRow(0);
+        }
+        if(currentList==ui->LocalMusiclist)
+        {
+            index=currentList->currentRow(); //播放选择的音乐
+            player->setSource(playList[index]);
+            player->play();
+        }else if(currentList==ui->NetMusicList)
+        {
+            index=currentList->currentRow(); //播放选择的音乐
+            NetMusicPlay(index);
+        }
         updateCurrentPlayingItem();
         break;
     }
@@ -191,44 +207,61 @@ void musicplayer::on_play_clicked()//播放暂停音乐
 
 void musicplayer::on_previous_clicked()//上一曲
 {
-    // 检查播放列表是否为空
-    if (playList.isEmpty()) {
-        QMessageBox::information(this, "提示", "播放列表为空，请先导入音乐文件");
+    if(ui->stackedWidget->currentIndex()==2)return;//历史播放页时按下按钮不反应
+    //检查列表中是否有音乐可播放
+    if ((currentList->count()==0&&player->playbackState()==QMediaPlayer::PlaybackState::StoppedState)) {
+        QMessageBox::information(this, "提示", "播放列表为空");
+        ui->play->setChecked(false);
         return;
     }
 
-    if (index == 0) {
-        index = playList.size() - 1;
+    if (index == 0) {    
+        if(player->source().isLocalFile())
+        index = ui->LocalMusiclist->count() - 1;
+        else index = ui->NetMusicList->count() - 1;
     } else {
         index--;
     }
-
-    player->setSource(playList[index]); // 设置媒体源为选中的 URL
+    if(player->source().isLocalFile())
+    {
+        player->setSource(playList[index]);// 设置媒体源为本地的URL
+        player->play();
+    }else
+    {
+        NetMusicPlay(index);//网络播放
+    }
     updateCurrentPlayingItem();
-    player->play(); // 播放选中的音乐
 }
 
 
 void musicplayer::on_next_clicked()//下一曲
 {
-    // 检查播放列表是否为空
-    if (playList.isEmpty()) {
-        QMessageBox::information(this, "提示", "播放列表为空，请先导入音乐文件");
+    if(ui->stackedWidget->currentIndex()==2)return;//历史播放页时按下按钮不反应
+    //检查列表中是否有音乐可播放
+    if ((currentList->count()==0&&player->playbackState()==QMediaPlayer::PlaybackState::StoppedState)) {
+        QMessageBox::information(this, "提示", "播放列表为空");
+        ui->play->setChecked(false);
         return;
     }
-    index=(index+1)%playList.size();
-    player->setSource(playList[index]); // 设置媒体源为选中的 URL
+    if(player->source().isLocalFile())
+    {
+        index=(index+1)%ui->LocalMusiclist->count();
+        player->setSource(playList[index]);// 设置媒体源为本地的URL
+        player->play();
+    }else
+    {
+        index=(index+1)%ui->NetMusicList->count();
+        NetMusicPlay(index);//网络播放
+    }
     updateCurrentPlayingItem();
-    player->play(); // 播放选中的音乐
 }
 
 
 void musicplayer::on_LocalMusiclist_itemDoubleClicked(QListWidgetItem *item)
 {
-    index =currentList->row(item); // 获取双击项目的索引
+    index =ui->LocalMusiclist->row(item); // 获取双击项目的索引
     player->setSource(playList[index]); // 设置媒体源为选中的 URL
     updateCurrentPlayingItem();
-    item->setForeground(Qt::red);
     player->play(); // 播放选中的音乐
 }
 
@@ -314,8 +347,7 @@ void musicplayer::on_MediaSourceChanged(const QUrl &mediaSource) { //媒体源�
         QString songName = mediaSource.fileName();
         musicplayer::upsertPlayHistory(songName);
     }else{
-        int id=currentList->currentRow();
-        index=id;
+        int id=index;
         QSqlQuery query;
         query.prepare("SELECT FileName FROM songlist WHERE id = :id");
         query.bindValue(":id", id);
@@ -619,7 +651,7 @@ QString musicplayer::getSearch_Md5(QString songname,QString time)
     return md5Hash;
 }
 
-QString musicplayer::loadPlayer(QString encode_album_audio_id)
+QString musicplayer::UrlAnalysis(QString encode_album_audio_id)
 {
     //构建歌曲的 URL
     QDateTime time = QDateTime::currentDateTime();
@@ -663,10 +695,22 @@ QString musicplayer::loadPlayer(QString encode_album_audio_id)
 
 void musicplayer::on_NetMusicList_itemDoubleClicked(QListWidgetItem *item) //双击列表项播放网络音乐
 {
-    // 获取双击的歌曲索引，即数据表的 ID 号
-    index=ui->NetMusicList->currentRow();
+    index=ui->NetMusicList->row(item);
+    NetMusicPlay(index);
+}
+
+
+void musicplayer::on_stackedWidget_currentChanged(int arg1) //界面切换
+{
+    currentwidget=ui->stackedWidget->widget(arg1);
+    currentList=currentwidget->findChild<QListWidget *>();
+    qDebug()<<ui->stackedWidget->currentIndex();
+}
+void musicplayer::NetMusicPlay(int netindex)
+{
+    qDebug()<<"ui->NetMusicList->currentRow"<<netindex;
     QSqlQuery query;
-    QString sql = QString("select * from songlist where id = %1;").arg(index);
+    QString sql = QString("select * from songlist where id = %1;").arg(netindex);
     if (!query.exec(sql))
     {
         QMessageBox::critical(nullptr, "select * from songlist where id =", db.lastError().text());
@@ -681,42 +725,12 @@ void musicplayer::on_NetMusicList_itemDoubleClicked(QListWidgetItem *item) //双
 
         singer_song_name = query.value(singer_song_namekey).toString();
         EMixSongID = query.value(EMixSongIDkey).toString();
-
-        // 查询历史数据表中是否已经存在该歌曲的记录
-        sql = QString("select EMixSongID from netsonghistory where EMixSongID = '%1';").arg(EMixSongID);
-        if (!query.exec(sql))
-        {
-            QMessageBox::critical(nullptr, "select hash from netsonghistory where EMixSongID =", db.lastError().text());
-        }
-        // 如果不存在该记录，则将其存入历史数据表
-        if (query.next() == NULL)
-        {
-            sql = QString("insert into netsonghistory values(NULL, '%1', '%2')").arg(singer_song_name).arg(EMixSongID);
-            if (!query.exec(sql))
-            {
-                QMessageBox::critical(nullptr, "insert error", db.lastError().text());
-            }
-            // 将歌手和歌名放入历史歌曲表中显示
-            // QListWidgetItem *item = new QListWidgetItem(singer_song_name);
-            // ui->lw_record->addItem(item);
-        }
     }
     // 播放选中的音乐
-    QString music=musicplayer::loadPlayer(EMixSongID);
+    QString music=musicplayer::UrlAnalysis(EMixSongID);
     player->setSource(QUrl(music));
     player->play();
+    updateCurrentPlayingItem();
 }
 
 
-void musicplayer::on_stackedWidget_currentChanged(int arg1) //界面切换
-{
-    currentwidget=ui->stackedWidget->widget(arg1);
-    currentList=currentwidget->findChild<QListWidget *>();
-    qDebug()<<ui->stackedWidget->currentIndex();
-}
-
-void musicplayer::getNetList()
-{
-    QSqlQuery query;
-    QString sql="delete from neturl;";
-}
