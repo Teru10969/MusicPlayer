@@ -25,6 +25,7 @@ class musicplayer : public QWidget
 public:
     explicit musicplayer(QWidget *parent = 0);
     ~musicplayer();
+    void resetAllItemsColor(QListWidget* listWidget);
     void updateCurrentPlayingItem();//将当前播放音乐变成红色
     void connectDatabase();//连接数据库
     void upsertPlayHistory(const QString &songName);//更新历史播放数据库
@@ -78,6 +79,8 @@ private slots:
     void on_NetMusicList_itemDoubleClicked(QListWidgetItem *item);
 
     void on_stackedWidget_currentChanged(int arg1);
+
+    void on_download_clicked();
 
 private:
     Ui::musicplayer *ui;

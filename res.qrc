@@ -16,7 +16,6 @@
         <file>res/hua.png</file>
         <file>res/jingyin.png</file>
         <file>res/liebiao.png</file>
-        <file>res/logo1.jpg</file>
         <file>res/logo2.jpg</file>
         <file>res/logo3.jpg</file>
         <file>res/Music.svg</file>
@@ -27,7 +26,6 @@
         <file>res/shixin.png</file>
         <file>res/shunxubofang.png</file>
         <file>res/suijibofang.png</file>
-        <file>res/wallpaper1.png</file>
         <file>res/wallpaper2.jpg</file>
         <file>res/wallpaper3.jpg</file>
         <file>res/wallpaper4.jpg</file>
@@ -42,5 +40,6 @@
         <file>res/zuidahua.png</file>
         <file>res/zuixiaohua.png</file>
         <file>res/One Last Kiss.jpg</file>
+        <file>res/wallpaper1.png</file>
     </qresource>
 </RCC>

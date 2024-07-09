@@ -120,7 +120,6 @@ release/qrc_res.cpp: res.qrc \
 		res/search.png \
 		res/xiayishou.png \
 		res/shixin.png \
-		res/logo1.jpg \
 		res/bofang.png \
 		res/logo2.jpg \
 		res/geciyidianji.png \
@@ -948,6 +947,37 @@ release/musicplayer.o: musicplayer.cpp musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtNetwork/qsslpresharedkeyauthenticator.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/QMetaType \
 		ui_musicplayer.h \
+		../../Qt/6.7.2/mingw_64/include/QtGui/QIcon \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QHBoxLayout \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qboxlayout.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qlayout.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qlayoutitem.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qgridlayout.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QHeaderView \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qheaderview.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QLabel \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qlabel.h \
+		../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
+		../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QLineEdit \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qlineedit.h \
+		../../Qt/6.7.2/mingw_64/include/QtGui/qtextcursor.h \
+		../../Qt/6.7.2/mingw_64/include/QtGui/qtextformat.h \
+		../../Qt/6.7.2/mingw_64/include/QtGui/qpen.h \
+		../../Qt/6.7.2/mingw_64/include/QtGui/qtextoption.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QSlider \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QSpacerItem \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QStackedWidget \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qstackedwidget.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QTableWidget \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qtablewidget.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/qtableview.h \
+		../../Qt/6.7.2/mingw_64/include/QtWidgets/QVBoxLayout \
 		../../Qt/6.7.2/mingw_64/include/QtGui/QMouseEvent \
 		../../Qt/6.7.2/mingw_64/include/QtSql/QSql \
 		../../Qt/6.7.2/mingw_64/include/QtSql/QSqlDatabase \
@@ -982,9 +1012,6 @@ release/musicplayer.o: musicplayer.cpp musicplayer.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/qjsondocument.h \
 		../../Qt/6.7.2/mingw_64/include/QtCore/QDebug \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QListWidgetItem \
-		../../Qt/6.7.2/mingw_64/include/QtWidgets/QTableWidget \
-		../../Qt/6.7.2/mingw_64/include/QtWidgets/qtablewidget.h \
-		../../Qt/6.7.2/mingw_64/include/QtWidgets/qtableview.h \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QTableWidgetItem \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/QMessageBox \
 		../../Qt/6.7.2/mingw_64/include/QtWidgets/qmessagebox.h \

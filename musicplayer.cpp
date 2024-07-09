@@ -143,9 +143,17 @@ void musicplayer::on_load_clicked()//导入本地音乐文件
     // ui->LocalMusiclist->setCurrentRow(0);
 }
 
-void musicplayer::updateCurrentPlayingItem()//将当前播放音乐变成红色
+/*将当前播放音乐变成红色*/
+void musicplayer::resetAllItemsColor(QListWidget* listWidget)
 {
-
+    for (int i = 0; i < listWidget->count(); ++i) {
+        listWidget->item(i)->setForeground(Qt::black);
+    }
+}
+void musicplayer::updateCurrentPlayingItem()
+{
+    resetAllItemsColor(ui->LocalMusiclist);
+    resetAllItemsColor(ui->NetMusicList);
     for (int i = 0; i < currentList->count(); i++) {
         if (i == index) {
             currentList->item(i)->setForeground(Qt::red);
@@ -346,6 +354,7 @@ void musicplayer::on_MediaSourceChanged(const QUrl &mediaSource) { //媒体源�
     if(mediaSource.isLocalFile()){
         QString songName = mediaSource.fileName();
         musicplayer::upsertPlayHistory(songName);
+        qDebug() << "新增一条播放记录:" << songName;
     }else{
         int id=index;
         QSqlQuery query;
@@ -359,7 +368,7 @@ void musicplayer::on_MediaSourceChanged(const QUrl &mediaSource) { //媒体源�
                 // 获取查询结果，并赋值给songname
                 QString netsongName = query.value(0).toString();
                 musicplayer::upsertPlayHistory(netsongName);
-                qDebug() << "FileName for id" << id << ":" << netsongName;
+                qDebug() << "新增一条播放记录" << id << ":" << netsongName;
             } else {
                 qDebug() << "No records found for id" << id;
             }
@@ -727,10 +736,62 @@ void musicplayer::NetMusicPlay(int netindex)
         EMixSongID = query.value(EMixSongIDkey).toString();
     }
     // 播放选中的音乐
-    QString music=musicplayer::UrlAnalysis(EMixSongID);
-    player->setSource(QUrl(music));
+    QString musicUrl=musicplayer::UrlAnalysis(EMixSongID);
+    player->setSource(QUrl(musicUrl));
     player->play();
     updateCurrentPlayingItem();
 }
 
+
+
+void musicplayer::on_download_clicked()
+{
+    if(currentList!=ui->NetMusicList)
+    {
+        QMessageBox::information(this, "提示", "请选择网络音乐下载");
+        return;
+    }
+
+    QString fileName=QFileDialog::getSaveFileName(this, "保存音乐文件", QDir::homePath(), "音乐文件 (*.mp3 *.flac *.wav)");
+    if (fileName.isEmpty())return;
+
+    int downloadindex=ui->NetMusicList->currentRow();
+    QSqlQuery query;
+    QString sql = QString("select * from songlist where id = %1;").arg(downloadindex);
+    if (!query.exec(sql))
+    {
+        QMessageBox::critical(nullptr, "select * from songlist where id =", db.lastError().text());
+    }
+    QString EMixSongID;
+    while (query.next())
+    {
+        QSqlRecord record = query.record();
+        int EMixSongIDkey = record.indexOf("EMixSongID");
+        EMixSongID = query.value(EMixSongIDkey).toString();
+    }
+    QString musicUrl=musicplayer::UrlAnalysis(EMixSongID);
+    //实例化网络请求操作事项
+    request = new QNetworkRequest;
+    //将url网页地址存入request请求中
+    request->setUrl(musicUrl);
+    //实例化网络管理（访问）
+    manager = new QNetworkAccessManager;
+    //通过get,上传具体的请求
+    QNetworkReply *reply =manager->get(*request);
+    connect(reply, &QNetworkReply::finished, this, [reply, fileName]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            QFile file(fileName);
+            if (file.open(QIODevice::WriteOnly)) {
+                file.write(reply->readAll());
+                // file.close();
+                QMessageBox::information(nullptr, "提示", "下载完成");
+            } else {
+                QMessageBox::information(nullptr, "提示", "文件保存失败");
+            }
+        } else {
+            QMessageBox::information(nullptr, "提示", "下载失败");
+        }
+        // reply->deleteLater();
+    });
+}
 
