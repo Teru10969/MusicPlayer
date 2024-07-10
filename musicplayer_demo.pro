@@ -13,9 +13,13 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        musicplayer.cpp
+        database.cpp \
+        musicplayer.cpp \
+        network.cpp
 
-HEADERS  += musicplayer.h
+HEADERS  += musicplayer.h \
+    database.h \
+    network.h
 
 FORMS    += musicplayer.ui
 

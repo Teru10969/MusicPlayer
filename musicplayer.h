@@ -1,18 +1,17 @@
 #ifndef MUSICPLAYER_H
 #define MUSICPLAYER_H
-
+#include<database.h>
+#include<network.h>
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include<QMessageBox>
 #include <QWidget>
 #include <QList>
 #include <QListWidget>
 #include <QPoint>
-#include <QSqlQuery>
+#include <QFile>
 #include <QString>
-#include <QNetworkRequest>          //HTTP的URL管理类
-#include <QNetworkAccessManager>    //URL的上传管理
-static QString kugouSearchApi = "https://complexsearch.kugou.com/v2/search/song?";
-static QString kugouDownldadApi = "https://wwwapi.kugou.com/play/songinfo?";
+
 
 namespace Ui {
 class musicplayer;
@@ -25,18 +24,22 @@ class musicplayer : public QWidget
 public:
     explicit musicplayer(QWidget *parent = 0);
     ~musicplayer();
+    Ui::musicplayer *ui;
+    QList<QUrl> playList;
+    QAudioOutput* output;
+    QMediaPlayer* player;
+    QUrl currentMediaSource;
+    QWidget* currentwidget;
+    QListWidget* currentList;
+    QTableWidget* currentTable;
+    int index=0;
+    bool flag1;
+    Database* database;
+    Network* network;
     void resetAllItemsColor(QListWidget* listWidget);
     void updateCurrentPlayingItem();//将当前播放音乐变成红色
-    void connectDatabase();//连接数据库
-    void upsertPlayHistory(const QString &songName);//更新历史播放数据库
-    void displayPlayHistory();//显示历史播放列表
-    void hashJsonAnalysis(QByteArray JsonData);
-    void httpAccess(QString url);
-    QString musicJsonAnalysis(QByteArray JsonData);
-    QString getDownload_Md5(QString time,QString encode_album_audio_id);
-    QString getSearch_Md5(QString songname,QString time);
     void getMusicList();
-    void NetMusicPlay(int netindex);
+    void setTimeSlider();
     // virtual void mouseMoveEvent(QMouseEvent* event);
     // virtual void mousePressEvent(QMouseEvent* event);
     // virtual void mouseReleaseEvent(QMouseEvent* event);
@@ -72,29 +75,20 @@ private slots:
 
     void on_search_clicked();
 
-    void netReply(QNetworkReply *reply);
-
-    QString UrlAnalysis(QString encode_album_audio_id);
-
     void on_NetMusicList_itemDoubleClicked(QListWidgetItem *item);
 
     void on_stackedWidget_currentChanged(int arg1);
 
     void on_download_clicked();
 
+    void on_minimize_clicked();
+
+    void on_maximize_clicked();
+
 private:
-    Ui::musicplayer *ui;
-    QList<QUrl> playList;
-    QAudioOutput* output;
-    QMediaPlayer* player;
-    QUrl currentMediaSource;
-    QWidget* currentwidget;
-    QListWidget* currentList;
-    int index=0;
-    QSqlDatabase db;
-    bool flag1;
-    QNetworkRequest* request;
-    QNetworkAccessManager* manager;
+
+
+
     // QPoint z;
 };
 

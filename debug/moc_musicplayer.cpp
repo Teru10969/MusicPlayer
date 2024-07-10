@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "../musicplayer.h"
+#include <QtGui/qtextcursor.h>
 #include <QtNetwork/QSslError>
 #include <QtCore/qmetatype.h>
 
@@ -58,15 +59,12 @@ constexpr auto qt_meta_stringdata_CLASSmusicplayerENDCLASS = QtMocHelpers::strin
     "on_MediaSourceChanged",
     "mediaSource",
     "on_search_clicked",
-    "netReply",
-    "QNetworkReply*",
-    "reply",
-    "UrlAnalysis",
-    "encode_album_audio_id",
     "on_NetMusicList_itemDoubleClicked",
     "on_stackedWidget_currentChanged",
     "arg1",
-    "on_download_clicked"
+    "on_download_clicked",
+    "on_minimize_clicked",
+    "on_maximize_clicked"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -104,10 +102,10 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSmusicplayerENDCLASS[] = {
       19,    1,  148,    2, 0x08,   17 /* Private */,
       21,    0,  151,    2, 0x08,   19 /* Private */,
       22,    1,  152,    2, 0x08,   20 /* Private */,
-      25,    1,  155,    2, 0x08,   22 /* Private */,
-      27,    1,  158,    2, 0x08,   24 /* Private */,
-      28,    1,  161,    2, 0x08,   26 /* Private */,
-      30,    0,  164,    2, 0x08,   28 /* Private */,
+      23,    1,  155,    2, 0x08,   22 /* Private */,
+      25,    0,  158,    2, 0x08,   24 /* Private */,
+      26,    0,  159,    2, 0x08,   25 /* Private */,
+      27,    0,  160,    2, 0x08,   26 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QByteArray,    3,
@@ -126,10 +124,10 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSmusicplayerENDCLASS[] = {
     QMetaType::Void, QMetaType::Int,   18,
     QMetaType::Void, QMetaType::QUrl,   20,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 23,   24,
-    QMetaType::QString, QMetaType::QString,   26,
     QMetaType::Void, 0x80000000 | 9,   10,
-    QMetaType::Void, QMetaType::Int,   29,
+    QMetaType::Void, QMetaType::Int,   24,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -177,12 +175,6 @@ Q_CONSTINIT const QMetaObject musicplayer::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<const QUrl &, std::false_type>,
         // method 'on_search_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'netReply'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QNetworkReply *, std::false_type>,
-        // method 'UrlAnalysis'
-        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         // method 'on_NetMusicList_itemDoubleClicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>,
@@ -190,6 +182,10 @@ Q_CONSTINIT const QMetaObject musicplayer::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'on_download_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_minimize_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_maximize_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -215,12 +211,11 @@ void musicplayer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 11: _t->on_option_currentRowChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         case 12: _t->on_MediaSourceChanged((*reinterpret_cast< std::add_pointer_t<QUrl>>(_a[1]))); break;
         case 13: _t->on_search_clicked(); break;
-        case 14: _t->netReply((*reinterpret_cast< std::add_pointer_t<QNetworkReply*>>(_a[1]))); break;
-        case 15: { QString _r = _t->UrlAnalysis((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
-            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 16: _t->on_NetMusicList_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
-        case 17: _t->on_stackedWidget_currentChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 18: _t->on_download_clicked(); break;
+        case 14: _t->on_NetMusicList_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
+        case 15: _t->on_stackedWidget_currentChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 16: _t->on_download_clicked(); break;
+        case 17: _t->on_minimize_clicked(); break;
+        case 18: _t->on_maximize_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

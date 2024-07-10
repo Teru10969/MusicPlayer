@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>960</width>
-    <height>540</height>
+    <width>992</width>
+    <height>558</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,8 +18,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>960</width>
-    <height>540</height>
+    <width>992</width>
+    <height>558</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
     <normaloff>:/res/logo3.jpg</normaloff>:/res/logo3.jpg</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">#widget_3{border-image: url(:/res/wallpaper1.png);}
+   <string notr="true">#mainWidget{border-image: url(:/res/wallpaper1.png);}
 
 QPushButton {
     border: none;
@@ -58,29 +58,35 @@ QSlider::groove:Horizontal#horizontalSlider_music
 }
 </string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_7">
+  <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0">
    <property name="spacing">
     <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>0</number>
+    <number>10</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>10</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>10</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>10</number>
    </property>
    <item>
-    <widget class="QWidget" name="widget_3" native="true">
+    <widget class="QWidget" name="mainWidget" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>960</width>
+       <height>540</height>
+      </size>
      </property>
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
@@ -138,7 +144,7 @@ QSlider::groove:Horizontal#horizontalSlider_music
           <number>0</number>
          </property>
          <item>
-          <widget class="QWidget" name="widget_9" native="true">
+          <widget class="QWidget" name="IconWidget" native="true">
            <property name="enabled">
             <bool>true</bool>
            </property>
@@ -169,8 +175,8 @@ QSlider::groove:Horizontal#horizontalSlider_music
           <widget class="QLabel" name="label">
            <property name="styleSheet">
             <string notr="true">QLabel {
-        font: 20pt &quot;Mistral&quot;;
-	    color: rgb(85, 85, 127);
+        font: 23pt &quot;Mistral&quot;; 
+	color: qconicalgradient(cx:0.46, cy:0.398091, angle:264.4, stop:0 rgba(245, 224, 176, 255), stop:0.09 rgba(246, 189, 237, 255), stop:0.14 rgba(194, 207, 246, 255), stop:0.19 rgba(184, 160, 168, 255), stop:0.25 rgba(171, 186, 248, 255), stop:0.32 rgba(243, 248, 224, 255), stop:0.385 rgba(249, 162, 183, 255), stop:0.47 rgba(100, 115, 124, 255), stop:0.58 rgba(251, 205, 202, 255), stop:0.65 rgba(170, 128, 185, 255), stop:0.75 rgba(252, 222, 204, 255), stop:0.805 rgba(206, 122, 218, 255), stop:0.86 rgba(254, 223, 175, 255), stop:0.909091 rgba(254, 236, 244, 255), stop:1 rgba(255, 191, 221, 255));
     }</string>
            </property>
            <property name="text">
@@ -198,7 +204,7 @@ QSlider::groove:Horizontal#horizontalSlider_music
           </spacer>
          </item>
          <item>
-          <widget class="QWidget" name="widget_4" native="true">
+          <widget class="QWidget" name="searchWidget" native="true">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -345,7 +351,7 @@ QSlider::groove:Horizontal#horizontalSlider_music
             <number>10</number>
            </property>
            <item>
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QPushButton" name="minimize">
              <property name="minimumSize">
               <size>
                <width>40</width>
@@ -370,6 +376,39 @@ QSlider::groove:Horizontal#horizontalSlider_music
                <width>23</width>
                <height>23</height>
               </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="maximize">
+             <property name="minimumSize">
+              <size>
+               <width>40</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>40</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="res.qrc">
+               <normaloff>:/res/chuangkouzuidahua.png</normaloff>
+               <normalon>:/res/zuidahua.png</normalon>:/res/chuangkouzuidahua.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>23</width>
+               <height>23</height>
+              </size>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -506,7 +545,7 @@ QListWidget::Item:selected
          <item>
           <widget class="QStackedWidget" name="stackedWidget">
            <property name="currentIndex">
-            <number>1</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="page1">
             <layout class="QHBoxLayout" name="horizontalLayout_8">
@@ -797,7 +836,7 @@ Line{
           <number>0</number>
          </property>
          <item>
-          <widget class="QWidget" name="widget_5" native="true">
+          <widget class="QWidget" name="playWidget" native="true">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -852,7 +891,7 @@ Line{
               </property>
               <property name="sizeHint" stdset="0">
                <size>
-                <width>120</width>
+                <width>140</width>
                 <height>20</height>
                </size>
               </property>
@@ -1175,7 +1214,7 @@ Line{
           </widget>
          </item>
          <item>
-          <widget class="QWidget" name="widget_6" native="true">
+          <widget class="QWidget" name="TimeSliderWidget" native="true">
            <property name="maximumSize">
             <size>
              <width>16777215</width>
