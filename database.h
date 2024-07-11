@@ -21,6 +21,7 @@ public:
     void connectDatabase();
     void upsertPlayHistory(const QString &songName);
     void displayPlayHistory();
+    void deletePlayHistory(const QString &songName);
 };
 
 #endif // DATABASE_H

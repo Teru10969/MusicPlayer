@@ -63,3 +63,16 @@ void Database::displayPlayHistory() { //显示历史播放记录
     musicplayer->ui->HistoryList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//填充列宽
     musicplayer->ui->HistoryList->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);// 根据内容设置所有行高
 }
+
+void Database::deletePlayHistory(const QString &songName)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM PlayHistory WHERE song_name = :song_name");
+    query.bindValue(":song_name", songName);
+
+    if (!query.exec()) {
+        qDebug() << "Error: failed to delete play history -" << query.lastError();
+    } else {
+        qDebug() << "Play history deleted successfully";
+    }
+}

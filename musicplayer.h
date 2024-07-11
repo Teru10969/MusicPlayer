@@ -40,50 +40,49 @@ public:
     void updateCurrentPlayingItem();//将当前播放音乐变成红色
     void getMusicList();
     void setTimeSlider();
-    // virtual void mouseMoveEvent(QMouseEvent* event);
-    // virtual void mousePressEvent(QMouseEvent* event);
-    // virtual void mouseReleaseEvent(QMouseEvent* event);
 
 signals:
     void finish(QByteArray Data);
 
 private slots:
 
-    void on_previous_clicked();
+    void on_previous_clicked();//上一首
 
-    void on_next_clicked();
+    void on_next_clicked();//下一首
 
-    void on_load_clicked();
+    void on_load_clicked();//导入本地音乐
 
-    void on_play_clicked();
+    void on_play_clicked();//播放暂停
 
-    void on_LocalMusiclist_itemDoubleClicked(QListWidgetItem *item);
+    void on_LocalMusiclist_itemDoubleClicked(QListWidgetItem *item);//双击播放本地音乐
 
-    void on_timeslider_sliderReleased();
+    void on_timeslider_sliderReleased();//音乐进度条
 
-    void on_close_clicked();
+    void on_close_clicked();//自定义关闭按钮
 
-    void on_volumeslider_sliderMoved(int position);
+    void on_volumeslider_sliderMoved(int position);//音量调节
 
-    void on_volumeslider_sliderPressed();
+    void on_volumeslider_sliderPressed();//音量调节
 
-    void on_voice_clicked();
+    void on_voice_clicked();//静音切换
 
-    void on_option_currentRowChanged(int currentRow);
+    void on_option_currentRowChanged(int currentRow);//界面切换
 
-    void on_MediaSourceChanged(const QUrl &mediaSource);
+    void on_stackedWidget_currentChanged(int arg1);//设置当前页面和列表
 
-    void on_search_clicked();
+    void on_MediaSourceChanged(const QUrl &mediaSource);//媒体源切换，插入历史播放记录
 
-    void on_NetMusicList_itemDoubleClicked(QListWidgetItem *item);
+    void on_search_clicked();//点击搜索
 
-    void on_stackedWidget_currentChanged(int arg1);
+    void on_NetMusicList_itemDoubleClicked(QListWidgetItem *item);//双击播放网络音乐
 
-    void on_download_clicked();
+    void on_download_clicked();//点击下载
 
-    void on_minimize_clicked();
+    void on_minimize_clicked();//自定义最小化
 
-    void on_maximize_clicked();
+    void on_maximize_clicked(); //自定义最大化
+
+    void slotShowMenu(const QPoint &pos);//历史播放记录右键菜单
 
 private:
 

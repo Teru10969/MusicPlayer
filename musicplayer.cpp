@@ -11,24 +11,17 @@
 #include <QColor>
 #include <QGraphicsDropShadowEffect>
 
-/*数据库相关*/
-#include <QSql>
-#include <QSqlDatabase>
-#include <QSqlDriver>
-#include <QSqlQuery>
-#include <QSqlRecord>
-#include <QSqlError>
-
 /*播放音乐相关*/
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include <QAudioDevice>
+#include<QMediaDevices>
 
 /*本地文件相关*/
 #include <QDir>
 #include <QFileDialog>
 
-
-
+#include <QMenu>
 
 musicplayer::musicplayer(QWidget *parent) :
     QWidget(parent),
@@ -51,11 +44,12 @@ musicplayer::musicplayer(QWidget *parent) :
     //设置主窗口透明
     this->setAttribute(Qt::WA_TranslucentBackground);
 
-    output=new QAudioOutput(this);//初始化音频输出设备
+    output=new QAudioOutput(this);//初始化音频输出，指向默认输出设备
     player=new QMediaPlayer(this);//初始化媒体播放器
+    player->setAudioOutput(output);//设置媒体播放器使用的音频输出设备
+
     database=new Database(this);//初始化数据库操作对象
     network=new Network(this);//初始化网络请求对象
-    player->setAudioOutput(output);//设置媒体播放器使用的音频输出设备
     database->connectDatabase();//连接数据库
     musicplayer::setTimeSlider();//初始化音乐进度条
     database->displayPlayHistory();//初始化历史播放记录
@@ -77,6 +71,8 @@ musicplayer::musicplayer(QWidget *parent) :
             flag1=false;
         }
     });
+    ui->HistoryList->setContextMenuPolicy(Qt::CustomContextMenu);//右键菜单
+    connect(ui->HistoryList, &QTableView::customContextMenuRequested, this, &musicplayer::slotShowMenu);
 }
 
 musicplayer::~musicplayer()
@@ -408,4 +404,24 @@ void musicplayer::on_download_clicked()//按下下载按钮
     network->download();//下载网络音乐
 }
 
+void musicplayer::slotShowMenu(const QPoint &pos)
+{
+    // 获取右键时 Qtableview 中的项
+    QModelIndex t_index = ui->HistoryList->indexAt(pos);
 
+    if (t_index.isValid())
+    {
+        QString songName = ui->HistoryList->item(t_index.row(), 0)->text(); // 获取第一列（歌曲名）的文本
+        Q_UNUSED(pos);
+        QMenu* contextMenu = new QMenu(this);
+        QAction* deleteAction = contextMenu->addAction("删除");
+        connect(deleteAction, &QAction::triggered, this, [this, songName]() {
+            database->deletePlayHistory(songName); // 删除数据库记录
+            database->displayPlayHistory(); // 更新界面显示
+        });
+
+        contextMenu->exec(ui->HistoryList->viewport()->mapToGlobal(pos));
+        delete contextMenu;
+    }
+
+}

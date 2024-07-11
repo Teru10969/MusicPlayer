@@ -22,16 +22,27 @@ class Network: public QWidget
 
 public:
     Network(musicplayer* parent);
+
     musicplayer* musicplayer;
-    void hashJsonAnalysis(QByteArray JsonData);
+
     void httpAccess(QString url);
+
+    void hashJsonAnalysis(QByteArray JsonData);
+
     QString musicJsonAnalysis(QByteArray JsonData);
+
     QString getDownload_Md5(QString time,QString encode_album_audio_id);
+
     QString getSearch_Md5(QString songname,QString time);
+
     QString UrlAnalysis(QString encode_album_audio_id);
+
     void search();
+
     Database* database;
+
     QNetworkRequest* request;
+
     QNetworkAccessManager* manager;
 
 signals:
