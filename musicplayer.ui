@@ -56,7 +56,31 @@ QSlider::groove:Horizontal#horizontalSlider_music
 {
 	background:rgb(0, 255, 0);height:4px;
 }
-</string>
+
+QMenu::item {
+    font-size:10pt;
+    color: rgb(0,0,0);
+    background-color:rgb(253,253,254);
+    padding: 8px 25px 6px 10px;
+    margin: 4px 1px;
+}
+QMenu::item:selected {
+	background-color: rgb(255, 0, 0);
+}
+QMenu::icon:checked {
+    background: rgb(253,253,254);
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    left: 1px;
+}
+QMenu::separator {
+    height: 2px;
+    background: rgb(235,235,236);
+    margin-left: 10px;
+    margin-right: 10px;
+}</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0">
    <property name="spacing">
@@ -766,7 +790,9 @@ Line{
 	height:5
 	background-color: rgba(255, 255, 255, 0);
 	border-top:2px solid #52DCFE;
-}</string>
+}
+
+</string>
                </property>
                <property name="editTriggers">
                 <set>QAbstractItemView::NoEditTriggers</set>

@@ -85,6 +85,8 @@ private slots:
 
     void on_maximize_clicked();
 
+    void slotShowMenu(const QPoint &pos);
+
 private:
 
 

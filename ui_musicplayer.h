@@ -126,7 +126,32 @@ public:
 "{\n"
 "	background:rgb(0, 255, 0);height:4px;\n"
 "}\n"
-""));
+"\n"
+"QMenu::item {\n"
+"    font-size:10pt;\n"
+"    color: rgb(0,0,0);\n"
+"    background-color:rgb(253,253,254);\n"
+"    padding: 8px 25px 6px 10px;\n"
+"    margin: 4px 1px;\n"
+"}\n"
+"QMenu::item:selected {\n"
+"	background-color: rgb(255, 0, 0);\n"
+"}\n"
+"QMenu::icon:checked {\n"
+"    background: rgb(253,253,254);\n"
+""
+                        "    position: absolute;\n"
+"    top: 1px;\n"
+"    right: 1px;\n"
+"    bottom: 1px;\n"
+"    left: 1px;\n"
+"}\n"
+"QMenu::separator {\n"
+"    height: 2px;\n"
+"    background: rgb(235,235,236);\n"
+"    margin-left: 10px;\n"
+"    margin-right: 10px;\n"
+"}"));
         horizontalLayout_7 = new QHBoxLayout(musicplayer);
         horizontalLayout_7->setSpacing(0);
         horizontalLayout_7->setContentsMargins(11, 11, 11, 11);
@@ -534,7 +559,9 @@ public:
 "	height:5\n"
 "	background-color: rgba(255, 255, 255, 0);\n"
 "	border-top:2px solid #52DCFE;\n"
-"}"));
+"}\n"
+"\n"
+""));
         HistoryList->setEditTriggers(QAbstractItemView::NoEditTriggers);
         HistoryList->horizontalHeader()->setVisible(true);
         HistoryList->verticalHeader()->setVisible(false);

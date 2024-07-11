@@ -27,8 +27,7 @@
 #include <QDir>
 #include <QFileDialog>
 
-
-
+#include <QMenu>
 
 musicplayer::musicplayer(QWidget *parent) :
     QWidget(parent),
@@ -77,6 +76,8 @@ musicplayer::musicplayer(QWidget *parent) :
             flag1=false;
         }
     });
+    ui->HistoryList->setContextMenuPolicy(Qt::CustomContextMenu);//右键菜单
+    connect(ui->HistoryList, &QTableView::customContextMenuRequested, this, &musicplayer::slotShowMenu);
 }
 
 musicplayer::~musicplayer()
@@ -408,4 +409,24 @@ void musicplayer::on_download_clicked()//按下下载按钮
     network->download();//下载网络音乐
 }
 
+void musicplayer::slotShowMenu(const QPoint &pos)
+{
+    // 获取右键时 Qtableview 中的项
+    QModelIndex t_index = ui->HistoryList->indexAt(pos);
 
+    if (t_index.isValid())
+    {
+        QString songName = ui->HistoryList->item(t_index.row(), 0)->text(); // 获取第一列（歌曲名）的文本
+        Q_UNUSED(pos);
+        QMenu* contextMenu = new QMenu(this);
+        QAction* deleteAction = contextMenu->addAction("删除");
+        connect(deleteAction, &QAction::triggered, this, [this, songName]() {
+            database->deletePlayHistory(songName); // 删除数据库记录
+            database->displayPlayHistory(); // 更新界面显示
+        });
+
+        contextMenu->exec(ui->HistoryList->viewport()->mapToGlobal(pos));
+        delete contextMenu;
+    }
+
+}
