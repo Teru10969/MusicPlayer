@@ -13,7 +13,7 @@ Network::Network(class musicplayer* parent){
     this->musicplayer=parent;
 }
 
-void Network::hashJsonAnalysis(QByteArray JsonData)
+void Network::hashJsonAnalysis(QByteArray JsonData)//解析 JSON 数据，并将解析出的歌单插入到数据库中
 {
     //qDebug()<< JsonData; // 打印输入的 JSON 数据，用于调试
     //移除callback123()
@@ -86,7 +86,8 @@ void Network::hashJsonAnalysis(QByteArray JsonData)
         }
     }
 }
-void Network::httpAccess(QString url)
+
+void Network::httpAccess(QString url)//发起一个 HTTP GET 请求，并连接信号槽以处理响应。
 {
     //实例化网络请求操作事项
     request = new QNetworkRequest;
@@ -99,7 +100,8 @@ void Network::httpAccess(QString url)
     //当网页回复消息，出发finish信号，读取数据
     connect(manager,&QNetworkAccessManager::finished,this,&Network::netReply);
 }
-QString Network::musicJsonAnalysis(QByteArray JsonData)
+
+QString Network::musicJsonAnalysis(QByteArray JsonData) //解析 JSON 数据，提取并返回播放 URL。
 {
     // 保存 JSON 数据到文件中以便查看
     QFile file("download.json");
@@ -132,7 +134,7 @@ QString Network::musicJsonAnalysis(QByteArray JsonData)
     }
 }
 
-QString Network::getDownload_Md5(QString time,QString encode_album_audio_id)
+QString Network::getDownload_Md5(QString time,QString encode_album_audio_id)//这个函数生成下载请求的 MD5 签名。
 {
     // 构建签名列表
     QStringList signature_list;
@@ -161,7 +163,7 @@ QString Network::getDownload_Md5(QString time,QString encode_album_audio_id)
     return md5Hash;
 }
 
-QString Network::getSearch_Md5(QString songname,QString time)
+QString Network::getSearch_Md5(QString songname,QString time) //这个函数生成搜索请求的 MD5 签名。
 {
     // 构建签名列表
     QStringList signature_list;
@@ -198,7 +200,7 @@ QString Network::getSearch_Md5(QString songname,QString time)
     return md5Hash;
 }
 
-void Network::netReply(QNetworkReply *reply)
+void Network::netReply(QNetworkReply *reply) //处理 HTTP 响应
 {
     // 获取响应状态码，200 属于正常
     QVariant status_code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
@@ -219,7 +221,7 @@ void Network::netReply(QNetworkReply *reply)
     }
 }
 
-void Network::search()
+void Network::search() //发起搜索请求，并解析和处理响应数据
 {
     musicplayer->ui->NetMusicList->clear();// 清空网络音乐列表
     QSqlQuery query;
@@ -266,12 +268,12 @@ void Network::search()
     loop.exec();
     disconnect(c);
 
-    // 解析获取的 JSON 数据
+    // 解析获取的 JSON 数据,并更新 UI
     hashJsonAnalysis(JsonData);
     musicplayer->ui->option->setCurrentRow(1);
 }
 
-QString Network::UrlAnalysis(QString encode_album_audio_id)
+QString Network::UrlAnalysis(QString encode_album_audio_id)//这个函数生成音乐播放 URL 并解析返回的 JSON 数据
 {
     //构建歌曲的 URL
     QDateTime time = QDateTime::currentDateTime();
@@ -341,13 +343,13 @@ void Network::NetMusicPlay(int netindex)
 
 void Network::download()
 {
-    if(musicplayer->currentList!=musicplayer->ui->NetMusicList||musicplayer->currentList->count()==0)
+    if(musicplayer->ui->option->currentRow()!=1||musicplayer->ui->NetMusicList->currentRow()==-1)
     {
         QMessageBox::information(musicplayer, "提示", "请选择网络音乐下载");
         return;
     }
 
-    QString fileName=QFileDialog::getSaveFileName(this, "保存音乐文件", QDir::homePath()+ "/" + musicplayer->currentList->currentItem()->text(), "音乐文件 (*.mp3 *.flac *.wav)");
+    QString fileName=QFileDialog::getSaveFileName(this, "保存音乐文件", "./music/" + musicplayer->currentList->currentItem()->text(), "音乐文件 (*.mp3 *.flac *.wav)");
     if (fileName.isEmpty())return;
 
     int downloadindex=musicplayer->ui->NetMusicList->currentRow();
